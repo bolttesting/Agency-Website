@@ -18,6 +18,10 @@ export default function GlobalJsonLd() {
         },
         address: {
           '@type': 'PostalAddress',
+          streetAddress: 'Suit 28 Nouvelle Building, 52 Sutton Court Road',
+          addressLocality: 'Sutton',
+          addressRegion: 'England',
+          postalCode: 'SM1 4SL',
           addressCountry: 'GB',
         },
       },
@@ -40,6 +44,7 @@ export default function GlobalJsonLd() {
         inLanguage: HTML_LANG,
         telephone: '+44 7440 147953',
         email: 'info@logixcontact.co.uk',
+        priceRange: 'GBP 799 - GBP 3000',
         address: {
           '@type': 'PostalAddress',
           addressCountry: 'GB',
