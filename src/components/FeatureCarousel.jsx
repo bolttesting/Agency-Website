@@ -55,7 +55,7 @@ const FEATURES = [
     id: 'seo',
     label: 'SEO Optimization',
     icon: 'search',
-    image: 'https://images.unsplash.com/photo-1551288049-bbda38a10ad5?q=80&w=1200',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200',
     description: 'Improve visibility and rank higher in search results.',
   },
   {
