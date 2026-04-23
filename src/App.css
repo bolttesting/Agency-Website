@@ -1486,6 +1486,12 @@
 }
 
 /* CTA row uses ui/ButtonTextChange (pill + sliding label) */
+.calculate__estimate-tc,
+.calculate__submit-tc {
+  --btc-fg: #ffffff;
+  color: #ffffff;
+}
+
 .calculate__submit-tc {
   margin-top: 0.15rem;
 }

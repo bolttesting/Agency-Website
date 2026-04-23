@@ -35,7 +35,7 @@ export default function CalculateCost() {
             <span><Icon name="sparkles" size={18} /> Quick response</span>
           </div>
           <div className="calculate__btns">
-            <ButtonTextChange href="/contact" variant="filled">
+            <ButtonTextChange href="/contact" variant="filled" className="calculate__estimate-tc">
               Estimate Your Project
             </ButtonTextChange>
             <ButtonTextChange href="#" variant="outline">
