@@ -1492,6 +1492,12 @@
   color: #ffffff;
 }
 
+[data-theme='light'] .calculate__estimate-tc.btn-text-change,
+[data-theme='light'] .calculate__submit-tc.btn-text-change {
+  --btc-fg: #ffffff;
+  color: #ffffff;
+}
+
 .calculate__submit-tc {
   margin-top: 0.15rem;
 }
