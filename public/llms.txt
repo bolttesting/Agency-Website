@@ -1,0 +1,67 @@
+# Logix Contact UK
+
+> Logix Contact is a premier software development and digital marketing agency in the UK, building custom websites, mobile apps, desktop software, and data-driven marketing strategies for businesses ready to grow.
+
+## Contact Information
+- **Address**: Suite 28, Nouvelle Building, 52 Sutton Court Road, Sutton, England, SM1 4SL
+- **Phone**: +44 7440 147953
+- **Email**: info@logixcontact.co.uk
+
+## Our Core Services
+
+### 💻 App Development
+- **Frontend Development**: Building responsive and interactive user interfaces.
+- **Backend Engineering**: Developing robust server-side logic and databases.
+- **App Innovation**: Creating cutting-edge mobile and web applications.
+
+### 🌐 Web Development
+- **Next-Level Experiences**: Crafting high-performance, user-centric websites.
+- **MERN | MEAN Power**: Full-stack development using modern JavaScript frameworks.
+- **PHP Back-End Solutions**: Developing dynamic and scalable web applications.
+
+### 🖥️ Desktop Development
+- **Robust Apps with .NET**: Building powerful and secure Windows desktop applications.
+- **Unity Immersion**: Developing interactive 2D and 3D content and games.
+
+### 📈 SEO Services
+- **SEO Audits and Analysis**: In-depth technical and content audits to identify growth opportunities.
+- **Keyword Research**: Strategic keyword targeting to attract the right audience.
+
+### 🎯 Digital Marketing Strategy
+- **Brand Presence**: Elevating your brand's visibility and engagement across digital channels.
+
+### 🎨 UI/UX Design
+- **Figma Mastery**: Designing intuitive and beautiful interfaces.
+- **Adobe XD & Illustrator Mastery**: Creating high-fidelity prototypes and graphics.
+- **Rive Animation Magic**: Bringing interfaces to life with interactive animations.
+
+### 🔗 View all capabilities
+- [View our complete service portfolio](https://logixcontact.co.uk/services)
+
+## Why Choose Us
+- **Proven UK expertise** – We understand local market nuances, GDPR compliance, and customer expectations.
+- **Tailored solutions** – We avoid off-the-shelf templates, building exactly what your business needs.
+- **End-to-end service** – From development to SEO, content, and paid ads, we provide a holistic approach.
+- **Transparent pricing** – Fixed quotes with no hidden fees.
+- **Ongoing support** – We offer maintenance, security updates, and 24/7 emergency assistance.
+
+## Frequently Asked Questions (FAQ)
+
+### What is your core development process?
+Our end-to-end process includes discovery, UI/UX design (using Figma, Adobe XD, etc.), development (Frontend, Backend, or .NET), and deployment.
+
+### Which technologies do you specialize in?
+We specialize in the MERN (MongoDB, Express.js, React, Node.js) and MEAN (MongoDB, Express.js, Angular, Node.js) stacks, PHP for back-end solutions, and .NET for robust desktop applications.
+
+### Do you offer digital marketing services?
+Yes. Beyond development, we also provide SEO (audits, keyword research), a digital marketing strategy focused on brand presence, and UI/UX design services.
+
+### How much does a website or app cost?
+A standard business website starts from **£2,000**. An e-commerce store typically ranges from **£5,000 to £15,000**. Pricing for custom apps and software is quoted individually based on your requirements.
+
+### How long does a project take?
+A simple website takes **3–5 weeks**. E-commerce and custom development projects normally take **8–12 weeks**, which includes design, development, testing, and training.
+
+## Company Information
+- [About Us](https://logixcontact.co.uk/about): Learn our story and mission.
+- [Contact Us](https://logixcontact.co.uk/contact): Get in touch for a free quote.
