@@ -9,13 +9,17 @@ export default function CookieNotice() {
   const [analyticsEnabled, setAnalyticsEnabled] = useState(false);
 
   useEffect(() => {
-    try {
-      const prefs = getCookiePrefs();
-      setAnalyticsEnabled(Boolean(prefs.analytics));
-      setVisible(!hasCookieDecision());
-    } catch {
-      setVisible(true);
-    }
+    const show = () => {
+      try {
+        const prefs = getCookiePrefs();
+        setAnalyticsEnabled(Boolean(prefs.analytics));
+        setVisible(!hasCookieDecision());
+      } catch {
+        setVisible(true);
+      }
+    };
+    const t = window.setTimeout(show, 450);
+    return () => clearTimeout(t);
   }, []);
 
   const year = useMemo(() => new Date().getFullYear(), []);

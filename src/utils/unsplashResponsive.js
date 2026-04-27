@@ -37,7 +37,7 @@ export function unsplashAvatarImgProps(imageUrl, sizes) {
     return { src: imageUrl, srcSet: undefined, sizes: undefined };
   }
   try {
-    const common = { auto: 'format', fit: 'crop', q: '65' };
+    const common = { auto: 'format', fit: 'crop', q: '50' };
     const widths = [40, 56, 72, 96];
     const srcSet = buildSrcSet(imageUrl, widths, common);
     const srcU = new URL(imageUrl);

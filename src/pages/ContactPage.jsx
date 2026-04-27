@@ -11,7 +11,7 @@ import './ContactPage.css';
 const OfficesMapSection = lazy(() => import('../components/OfficesMapSection'));
 
 export default function ContactPage() {
-  const { settings, refresh } = useSiteData();
+  const { settings, loadContactSubmissions } = useSiteData();
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -46,7 +46,7 @@ export default function ContactPage() {
           subject: form.subject || null,
           message: form.message,
         });
-        await refresh();
+        await loadContactSubmissions();
       }
       setSubmitted(true);
     } catch (err) {

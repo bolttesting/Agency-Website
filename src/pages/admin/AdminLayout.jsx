@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 import { ensureSupabase, isSupabaseConfigured } from '../../lib/supabase';
+import { useSiteData } from '../../context/SiteDataContext';
 import Seo from '../../components/Seo';
 import './Admin.css';
 
@@ -8,6 +9,11 @@ export default function AdminLayout() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const { loadContactSubmissions } = useSiteData();
+
+  useEffect(() => {
+    if (user) void loadContactSubmissions();
+  }, [user, loadContactSubmissions]);
 
   useEffect(() => {
     if (!isSupabaseConfigured()) {

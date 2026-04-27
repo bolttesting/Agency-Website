@@ -2104,6 +2104,8 @@
   position: relative;
   z-index: 1;
   overflow: hidden;
+  /* Reduces late paint reflow from nested decorative layers (Lighthouse CLS). */
+  contain: layout style;
 }
 
 .footer__bg-gradient {

@@ -4,7 +4,7 @@ import { adminApi } from '../../lib/adminApi';
 import './Admin.css';
 
 export default function ContactsAdmin() {
-  const { contactSubmissions, refresh } = useSiteData();
+  const { contactSubmissions, loadContactSubmissions } = useSiteData();
   const [items, setItems] = useState([]);
 
   useEffect(() => {
@@ -15,7 +15,7 @@ export default function ContactsAdmin() {
     if (!confirm('Delete this submission?')) return;
     try {
       await adminApi.contacts.delete(id);
-      await refresh();
+      await loadContactSubmissions();
     } catch (e) {
       alert('Error: ' + e.message);
     }
@@ -31,7 +31,9 @@ export default function ContactsAdmin() {
     <div>
       <div className="admin-header">
         <h1>Contact Submissions</h1>
-        <button className="admin-btn admin-btn--secondary" onClick={refresh}>Refresh</button>
+        <button type="button" className="admin-btn admin-btn--secondary" onClick={() => void loadContactSubmissions()}>
+          Refresh
+        </button>
       </div>
       <div className="admin-card">
         <h2>Messages ({items.length})</h2>

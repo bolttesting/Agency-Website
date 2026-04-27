@@ -52,17 +52,36 @@ export function SiteDataProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [useSupabase, setUseSupabase] = useState(false);
 
-  const loadFromSupabase = useCallback(async () => {
+  const loadContactSubmissions = useCallback(async () => {
+    const client = await ensureSupabase();
+    if (!client) return;
+    try {
+      const { data, error } = await client
+        .from('contact_submissions')
+        .select('*')
+        .order('created_at', { ascending: false });
+      if (error) throw error;
+      setContactSubmissions(Array.isArray(data) ? data : []);
+    } catch (e) {
+      console.warn('Contact submissions load failed:', e);
+    }
+  }, []);
+
+  const loadFromSupabase = useCallback(async (options = {}) => {
+    const { withContactSubmissions = true } = options;
     const client = await ensureSupabase();
     if (!client) return false;
     try {
-      const [portRes, blogRes, teamRes, testRes, settingsRes, subsRes] = await Promise.all([
+      const [portRes, blogRes, teamRes, testRes, settingsRes, svcRes, subsRes] = await Promise.all([
         client.from('portfolio').select('*').order('sort_order'),
         client.from('blog_posts').select('*').order('date', { ascending: false }),
         client.from('team_members').select('*').order('sort_order'),
         client.from('testimonials').select('*').order('sort_order'),
         client.from('site_settings').select('*').single(),
-        client.from('contact_submissions').select('*').order('created_at', { ascending: false }),
+        client.from('services').select('*').order('sort_order'),
+        withContactSubmissions
+          ? client.from('contact_submissions').select('*').order('created_at', { ascending: false })
+          : Promise.resolve({ data: null, error: null }),
       ]);
 
       // Use DB rows only (including empty arrays). Static fallbacks use non-UUID ids and break admin saves against Supabase.
@@ -99,9 +118,11 @@ export function SiteDataProvider({ children }) {
         setTestimonials([]);
       }
       if (settingsRes.data) setSettings({ ...staticSettings, ...settingsRes.data });
-      if (subsRes.data) setContactSubmissions(subsRes.data);
+      if (withContactSubmissions) {
+        if (subsRes.data) setContactSubmissions(subsRes.data);
+        else setContactSubmissions([]);
+      }
 
-      const svcRes = await client.from('services').select('*').order('sort_order');
       if (Array.isArray(svcRes.data) && svcRes.data.length > 0) setServices(svcRes.data);
       else setServices(servicesMenu);
 
@@ -115,9 +136,11 @@ export function SiteDataProvider({ children }) {
 
   useEffect(() => {
     let cancelled = false;
+    let idleId = 0;
+    let timeoutId = 0;
     const run = async () => {
       setLoading(true);
-      const supabaseLoadOk = await loadFromSupabase();
+      const supabaseLoadOk = await loadFromSupabase({ withContactSubmissions: false });
       if (cancelled) return;
       setUseSupabase(supabaseLoadOk);
 
@@ -133,19 +156,41 @@ export function SiteDataProvider({ children }) {
     };
 
     const start = () => {
+      if (cancelled) return;
       void run();
     };
-    if (typeof window !== 'undefined' && typeof window.requestIdleCallback === 'function') {
-      const id = window.requestIdleCallback(start, { timeout: 1200 });
-      return () => {
-        cancelled = true;
-        window.cancelIdleCallback(id);
-      };
+
+    const scheduleAfterWindowLoad = () => {
+      if (typeof window === 'undefined') {
+        start();
+        return;
+      }
+      if (typeof window.requestIdleCallback === 'function') {
+        idleId = window.requestIdleCallback(start, { timeout: 4000 });
+      } else {
+        timeoutId = window.setTimeout(start, 800);
+      }
+    };
+
+    const onWindowLoad = () => {
+      scheduleAfterWindowLoad();
+    };
+
+    if (typeof document === 'undefined' || document.readyState === 'complete') {
+      scheduleAfterWindowLoad();
+    } else if (typeof window !== 'undefined') {
+      window.addEventListener('load', onWindowLoad, { once: true });
+    } else {
+      scheduleAfterWindowLoad();
     }
-    const t = setTimeout(start, 0);
+
     return () => {
       cancelled = true;
-      clearTimeout(t);
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('load', onWindowLoad);
+        if (idleId && 'cancelIdleCallback' in window) window.cancelIdleCallback(idleId);
+      }
+      if (timeoutId) clearTimeout(timeoutId);
     };
   }, [loadFromSupabase]);
 
@@ -175,6 +220,11 @@ export function SiteDataProvider({ children }) {
     }
   }, [services]);
 
+  const refreshAll = useCallback(
+    () => loadFromSupabase({ withContactSubmissions: true }),
+    [loadFromSupabase],
+  );
+
   const value = {
     portfolio,
     portfolioDetails,
@@ -190,7 +240,8 @@ export function SiteDataProvider({ children }) {
     loading,
     useSupabase,
     isSupabaseConfigured: isSupabaseConfigured(),
-    refresh: loadFromSupabase,
+    refresh: refreshAll,
+    loadContactSubmissions,
   };
 
   return (
