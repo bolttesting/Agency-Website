@@ -1,4 +1,4 @@
-import { lazy, Suspense, useMemo } from 'react';
+import { lazy, Suspense, useMemo, useState, useEffect } from 'react';
 import { m, useReducedMotion } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
 import { useSiteData } from '../context/SiteDataContext';
@@ -98,7 +98,12 @@ function heroAvatarsFromTeam(team) {
 
 export default function Hero() {
   const reduceMotion = useReducedMotion();
-  const idleReady = useIdleReady({ timeout: 2200 });
+  const [idleTimeout, setIdleTimeout] = useState(2200);
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    setIdleTimeout(window.matchMedia('(max-width: 768px)').matches ? 4800 : 2200);
+  }, []);
+  const idleReady = useIdleReady({ timeout: idleTimeout });
   const { theme } = useTheme();
   const { team } = useSiteData();
   const avatarItems = useMemo(() => heroAvatarsFromTeam(team), [team]);

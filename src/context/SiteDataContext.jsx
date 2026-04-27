@@ -69,6 +69,14 @@ export function SiteDataProvider({ children }) {
 
   const loadFromSupabase = useCallback(async (options = {}) => {
     const { withContactSubmissions = true } = options;
+    // Yield to the browser so first paint can complete before the Supabase chunk competes for the main thread.
+    if (typeof window !== 'undefined' && typeof window.requestAnimationFrame === 'function') {
+      await new Promise((r) => {
+        window.requestAnimationFrame(() => {
+          window.requestAnimationFrame(r);
+        });
+      });
+    }
     const client = await ensureSupabase();
     if (!client) return false;
     try {

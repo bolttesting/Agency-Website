@@ -38,7 +38,7 @@ export const TECH_STACK_ARC_ITEMS = [
   {
     id: 'supabase',
     label: 'Supabase',
-    iconSrc: 'https://cdn.simpleicons.org/supabase/3ECF8E',
+    iconSrc: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg',
   },
   {
     id: 'threejs',
