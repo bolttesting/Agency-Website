@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { m, useInView } from 'framer-motion';
 
 const projects = [
@@ -48,13 +49,11 @@ function ProjectCard({ project, index }) {
         <span className="project-card__type">{project.type}</span>
         <h3 className="project-card__name">{project.name}</h3>
         <p className="project-card__tech">{project.tech}</p>
-        <m.a
-          href="#"
-          className="project-card__link"
-          whileHover={{ x: 5 }}
-        >
-          View Project →
-        </m.a>
+        <m.div whileHover={{ x: 5 }}>
+          <Link to="/portfolio" className="project-card__link">
+            View Project →
+          </Link>
+        </m.div>
       </div>
       <div className="project-card__code-preview">
         <span>// {project.name.toLowerCase()}.jsx</span>

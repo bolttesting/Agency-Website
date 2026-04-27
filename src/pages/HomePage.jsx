@@ -15,7 +15,7 @@ import './HomeLanding.css'
 export default function HomePage() {
   return (
     <div className="home-landing">
-      <Seo />
+      <Seo image="/LC.png" />
       <Hero />
       <HomeServicesMarquee />
       <Expertise />

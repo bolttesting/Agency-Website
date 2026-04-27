@@ -1,11 +1,21 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { m } from 'framer-motion';
 import Icon from './Icons';
 import { servicesMenu } from '../data/servicesData';
+import { useSiteData } from '../context/SiteDataContext';
+import { whatsappHref } from '../utils/whatsappLink';
 import ButtonTextChange from './ui/ButtonTextChange';
 
+const CHAT_HELLO = 'Hi, I would like to chat about a project.';
+
 export default function CalculateCost() {
+  const { settings } = useSiteData();
   const [form, setForm] = useState({ name: '', email: '', service: '', message: '' });
+
+  const chatLiveHref = useMemo(
+    () => whatsappHref(settings?.whatsapp, CHAT_HELLO) ?? '/contact',
+    [settings?.whatsapp],
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,7 +48,7 @@ export default function CalculateCost() {
             <ButtonTextChange href="/contact" variant="filled" className="calculate__estimate-tc">
               Estimate Your Project
             </ButtonTextChange>
-            <ButtonTextChange href="#" variant="outline">
+            <ButtonTextChange href={chatLiveHref} variant="outline" rel={chatLiveHref.startsWith('http') ? 'noopener noreferrer' : undefined} target={chatLiveHref.startsWith('http') ? '_blank' : undefined}>
               Chat Live
             </ButtonTextChange>
           </div>

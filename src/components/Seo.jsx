@@ -97,14 +97,18 @@ export default function Seo({
 
     upsertLink('canonical', canonical);
 
-    let hreflang = document.querySelector('link[rel="alternate"][hreflang="en-GB"]');
-    if (!hreflang) {
-      hreflang = document.createElement('link');
-      hreflang.setAttribute('rel', 'alternate');
-      hreflang.setAttribute('hreflang', 'en-GB');
-      document.head.appendChild(hreflang);
-    }
-    hreflang.setAttribute('href', canonical);
+    const ensureHreflang = (code) => {
+      let el = document.querySelector(`link[rel="alternate"][hreflang="${code}"]`);
+      if (!el) {
+        el = document.createElement('link');
+        el.setAttribute('rel', 'alternate');
+        el.setAttribute('hreflang', code);
+        document.head.appendChild(el);
+      }
+      el.setAttribute('href', canonical);
+    };
+    ensureHreflang('en-GB');
+    ensureHreflang('x-default');
 
     if (type === 'article' && articlePublishedTime) {
       upsertMeta('property', 'article:published_time', articlePublishedTime);
