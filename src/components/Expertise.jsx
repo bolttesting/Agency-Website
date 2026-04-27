@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 const FeatureCarousel = lazy(() => import('./FeatureCarousel'));
 
 export default function Expertise() {
@@ -26,7 +26,7 @@ export default function Expertise() {
     <section ref={sectionRef} className="section expertise" id="services">
       <div className="expertise__glow expertise__glow--1" />
       <div className="section__inner">
-        <motion.div
+        <m.div
           className="expertise__header"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -37,8 +37,8 @@ export default function Expertise() {
           <h2 className="expertise__title">Our Expertise on Demand</h2>
           <p className="expertise__subtitle">We provide next-level services on demand.</p>
           <span className="expertise__accent-line" />
-        </motion.div>
-        <motion.div
+        </m.div>
+        <m.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -59,7 +59,7 @@ export default function Expertise() {
           ) : (
             <div className="expertise__carousel-placeholder" aria-hidden />
           )}
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

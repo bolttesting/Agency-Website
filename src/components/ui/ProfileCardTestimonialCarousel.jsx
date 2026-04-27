@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import './profile-card-testimonial-carousel.css'
 
@@ -81,7 +81,7 @@ export function ProfileCardTestimonialCarousel({ items = [], className }) {
       <div className="profile-carousel__desktop">
         <div className="profile-carousel__avatar-shell">
           <AnimatePresence mode="wait">
-            <motion.div
+            <m.div
               key={current.imageUrl + currentIndex}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -90,13 +90,13 @@ export function ProfileCardTestimonialCarousel({ items = [], className }) {
               style={{ width: '100%', height: '100%' }}
             >
               <img src={current.imageUrl} alt={current.name} draggable={false} loading="lazy" />
-            </motion.div>
+            </m.div>
           </AnimatePresence>
         </div>
 
         <div className="profile-carousel__card">
           <AnimatePresence mode="wait">
-            <motion.div
+            <m.div
               key={current.name + currentIndex}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -126,7 +126,7 @@ export function ProfileCardTestimonialCarousel({ items = [], className }) {
                   )
                 })}
               </div>
-            </motion.div>
+            </m.div>
           </AnimatePresence>
         </div>
       </div>
@@ -134,7 +134,7 @@ export function ProfileCardTestimonialCarousel({ items = [], className }) {
       <div className="profile-carousel__mobile">
         <div className="profile-carousel__mobile-avatar">
           <AnimatePresence mode="wait">
-            <motion.div
+            <m.div
               key={current.imageUrl + currentIndex}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -143,12 +143,12 @@ export function ProfileCardTestimonialCarousel({ items = [], className }) {
               style={{ width: '100%', height: '100%' }}
             >
               <img src={current.imageUrl} alt={current.name} draggable={false} loading="lazy" />
-            </motion.div>
+            </m.div>
           </AnimatePresence>
         </div>
         <div className="profile-carousel__mobile-content">
           <AnimatePresence mode="wait">
-            <motion.div
+            <m.div
               key={current.name + currentIndex}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -176,7 +176,7 @@ export function ProfileCardTestimonialCarousel({ items = [], className }) {
                   )
                 })}
               </div>
-            </motion.div>
+            </m.div>
           </AnimatePresence>
         </div>
       </div>

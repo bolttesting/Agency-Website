@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { m, useInView } from 'framer-motion';
 import Icon from './Icons';
 
 const services = [
@@ -11,7 +11,7 @@ const services = [
 
 function ServiceCard({ item, index }) {
   return (
-    <motion.div
+    <m.div
       className="service-card"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -22,15 +22,15 @@ function ServiceCard({ item, index }) {
         transition: { duration: 0.3 },
       }}
     >
-      <motion.div
+      <m.div
         className="service-card__icon"
         whileHover={{ scale: 1.1, rotate: 5 }}
       >
         <Icon name={item.icon} size={32} />
-      </motion.div>
+      </m.div>
       <h3 className="service-card__title">{item.title}</h3>
       <p className="service-card__desc">{item.desc}</p>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -41,7 +41,7 @@ export default function Services() {
   return (
     <section className="section services" id="services" ref={ref}>
       <div className="section__inner">
-        <motion.div
+        <m.div
           className="section__header"
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -52,7 +52,7 @@ export default function Services() {
           <p className="section__desc">
             Full-stack expertise across web, mobile, and digital platforms.
           </p>
-        </motion.div>
+        </m.div>
 
         <div className="services__grid">
           {services.map((item, i) => (

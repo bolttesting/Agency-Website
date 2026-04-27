@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { supabase } from '../../lib/supabase';
+import { ensureSupabase, isSupabaseConfigured } from '../../lib/supabase';
 import './Admin.css';
 
 /** Inline layout/colors so the page is visible even if Admin.css fails to load on the edge (CDN / rewrite issues). */
@@ -33,6 +33,7 @@ export default function AdminLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [clientReady, setClientReady] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
@@ -44,13 +45,25 @@ export default function AdminLogin() {
     if (meta) meta.setAttribute('content', 'noindex, nofollow');
   }, []);
 
+  useEffect(() => {
+    if (!isSupabaseConfigured()) return;
+    let cancelled = false;
+    void ensureSupabase().then(() => {
+      if (!cancelled) setClientReady(true);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!supabase) return;
+    const client = await ensureSupabase();
+    if (!client) return;
     setError('');
     setLoading(true);
     try {
-      const { error: err } = await supabase.auth.signInWithPassword({ email, password });
+      const { error: err } = await client.auth.signInWithPassword({ email, password });
       if (err) throw err;
       navigate(from, { replace: true });
     } catch (err) {
@@ -60,7 +73,7 @@ export default function AdminLogin() {
     }
   };
 
-  if (!supabase) {
+  if (!isSupabaseConfigured()) {
     return (
       <div className="admin-login" style={shellStyle}>
         <div className="admin-login__card" style={cardStyle}>
@@ -75,6 +88,16 @@ export default function AdminLogin() {
           <a href="/" style={{ color: '#14b8a6' }}>
             ← Back to Site
           </a>
+        </div>
+      </div>
+    );
+  }
+
+  if (!clientReady) {
+    return (
+      <div className="admin-login" style={shellStyle}>
+        <div className="admin-login__card" style={cardStyle}>
+          <p style={{ color: '#a1a1aa' }}>Loading…</p>
         </div>
       </div>
     );

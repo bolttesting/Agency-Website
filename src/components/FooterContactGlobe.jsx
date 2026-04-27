@@ -45,7 +45,7 @@ const presenceArcs = [
 
 /**
  * COBE globe for footer “Global presence” — London, Dubai, Pakistan.
- * Hidden on small screens / reduced motion.
+ * Hidden on small screens / reduced m.
  */
 export default function FooterContactGlobe() {
   /** First paint must match desktop globe slot — avoids large CLS from null → 240px mount. */

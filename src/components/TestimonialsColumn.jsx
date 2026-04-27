@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Stars } from './Icons';
 import './TestimonialsColumn.css';
 
@@ -53,7 +53,7 @@ export function TestimonialsColumn({
 
   return (
     <div className={['tcol', className].filter(Boolean).join(' ')}>
-      <motion.div
+      <m.div
         className="tcol__track"
         animate={{ y: reverse ? ['-50%', '0%'] : ['0%', '-50%'] }}
         transition={{
@@ -73,7 +73,7 @@ export function TestimonialsColumn({
             <TestimonialMarqueeCard key={`m2-${i}-${t.name}`} t={t} />
           ))}
         </div>
-      </motion.div>
+      </m.div>
     </div>
   );
 }

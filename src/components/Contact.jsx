@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 export default function Contact() {
   const [formState, setFormState] = useState({ name: '', email: '', message: '' });
@@ -16,7 +16,7 @@ export default function Contact() {
   return (
     <section className="section contact" id="contact">
       <div className="section__inner contact__inner">
-        <motion.div
+        <m.div
           className="contact__header"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -28,9 +28,9 @@ export default function Contact() {
           <p className="section__desc">
             Ready to turn your idea into reality? Drop us a line.
           </p>
-        </motion.div>
+        </m.div>
 
-        <motion.form
+        <m.form
           className="contact__form"
           onSubmit={handleSubmit}
           initial={{ opacity: 0, y: 40 }}
@@ -39,7 +39,7 @@ export default function Contact() {
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           <div className="contact__row">
-            <motion.div
+            <m.div
               className="contact__field"
               whileFocus={{ scale: 1.01 }}
             >
@@ -53,8 +53,8 @@ export default function Contact() {
                 onChange={handleChange}
                 required
               />
-            </motion.div>
-            <motion.div
+            </m.div>
+            <m.div
               className="contact__field"
               whileFocus={{ scale: 1.01 }}
             >
@@ -68,9 +68,9 @@ export default function Contact() {
                 onChange={handleChange}
                 required
               />
-            </motion.div>
+            </m.div>
           </div>
-          <motion.div
+          <m.div
             className="contact__field"
             whileFocus={{ scale: 1.01 }}
           >
@@ -83,16 +83,16 @@ export default function Contact() {
               value={formState.message}
               onChange={handleChange}
             />
-          </motion.div>
-          <motion.button
+          </m.div>
+          <m.button
             type="submit"
             className="contact__submit"
             whileHover={{ boxShadow: '0 0 40px rgba(0, 245, 255, 0.5)' }}
             whileTap={{ scale: 0.98 }}
           >
             Send Message
-          </motion.button>
-        </motion.form>
+          </m.button>
+        </m.form>
       </div>
     </section>
   );

@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { HoverEffect } from './ui/card-hover-effect';
 
 const offerings = [
@@ -45,7 +45,7 @@ export default function BuildingTomorrow() {
     <section className="section building">
       <div className="building__glow" />
       <div className="section__inner">
-        <motion.div
+        <m.div
           className="building__header"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -56,7 +56,7 @@ export default function BuildingTomorrow() {
           <h2 className="building__title">Building Tomorrow, one line of code at a time</h2>
           <p className="building__subtitle">Comprehensive solutions for modern businesses.</p>
           <span className="building__accent-line" />
-        </motion.div>
+        </m.div>
         <div className="building__cards-shell">
           <HoverEffect items={offerings} />
         </div>

@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { m, useInView } from 'framer-motion';
 
 const stats = [
   { value: '50+', label: 'Projects Delivered' },
@@ -14,7 +14,7 @@ export default function About() {
   return (
     <section className="section about" id="about" ref={ref}>
       <div className="section__inner about__inner">
-        <motion.div
+        <m.div
           className="about__content"
           initial={{ opacity: 0, x: -30 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -33,16 +33,16 @@ export default function About() {
             bring digital products to life. Our stack is modern, our process is
             agile, our results speak for themselves.
           </p>
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           className="about__stats"
           initial={{ opacity: 0, x: 30 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           {stats.map((stat, i) => (
-            <motion.div
+            <m.div
               key={stat.label}
               className="about__stat"
               initial={{ opacity: 0, y: 20 }}
@@ -52,9 +52,9 @@ export default function About() {
             >
               <span className="about__stat-value">{stat.value}</span>
               <span className="about__stat-label">{stat.label}</span>
-            </motion.div>
+            </m.div>
           ))}
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

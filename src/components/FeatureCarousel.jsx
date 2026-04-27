@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import Icon from './Icons';
 import { unsplashImgProps } from '../utils/unsplashResponsive';
 import './FeatureCarousel.css';
@@ -128,7 +128,7 @@ export default function FeatureCarousel() {
               );
 
               return (
-                <motion.div
+                <m.div
                   key={feature.id}
                   style={{
                     height: ITEM_HEIGHT,
@@ -163,7 +163,7 @@ export default function FeatureCarousel() {
                       {feature.label}
                     </span>
                   </button>
-                </motion.div>
+                </m.div>
               );
             })}
           </div>
@@ -178,7 +178,7 @@ export default function FeatureCarousel() {
               const isNext = status === 'next';
 
               return (
-                <motion.div
+                <m.div
                   key={feature.id}
                   initial={false}
                   animate={{
@@ -212,7 +212,7 @@ export default function FeatureCarousel() {
 
                   <AnimatePresence>
                     {isActive && (
-                      <motion.div
+                      <m.div
                         key={`overlay-${feature.id}`}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -225,7 +225,7 @@ export default function FeatureCarousel() {
                         <p className="feature-carousel__card-desc">
                           {feature.description}
                         </p>
-                      </motion.div>
+                      </m.div>
                     )}
                   </AnimatePresence>
 
@@ -240,7 +240,7 @@ export default function FeatureCarousel() {
                       Live Session
                     </span>
                   </div>
-                </motion.div>
+                </m.div>
               );
             })}
           </div>

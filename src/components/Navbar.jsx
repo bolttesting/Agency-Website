@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { useScroll } from '../hooks/useScroll';
 import { useTheme } from '../context/ThemeContext';
 import ServicesDropdown from './ServicesDropdown';
@@ -71,7 +71,7 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.header
+      <m.header
         initial={{ y: -24, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.45, ease: [0.23, 1, 0.32, 1] }}
@@ -134,14 +134,14 @@ export default function Navbar() {
             <MenuToggleIcon open={mobileOpen} duration={300} />
           </button>
         </nav>
-      </motion.header>
+      </m.header>
 
       <NavbarSearch open={searchOpen} onClose={closeSearch} />
 
       <AnimatePresence>
         {mobileOpen && (
           <>
-            <motion.div
+            <m.div
               key="navbar-overlay-bg"
               className="navbar__drawer-backdrop"
               initial={{ opacity: 0 }}
@@ -151,7 +151,7 @@ export default function Navbar() {
               aria-hidden
               onClick={() => setMobileOpen(false)}
             />
-            <motion.div
+            <m.div
               key="navbar-drawer"
               className="navbar__drawer"
               initial={{ opacity: 0 }}
@@ -159,7 +159,7 @@ export default function Navbar() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
             >
-              <motion.div
+              <m.div
                 className="navbar__drawer-inner"
                 data-slot={mobileOpen ? 'open' : 'closed'}
                 initial={{ opacity: 0, scale: 0.96 }}
@@ -248,8 +248,8 @@ export default function Navbar() {
                     {isAbout ? 'Get a Quote' : 'Get Started'}
                   </ButtonCrossArrow>
                 </div>
-              </motion.div>
-            </motion.div>
+              </m.div>
+            </m.div>
           </>
         )}
       </AnimatePresence>

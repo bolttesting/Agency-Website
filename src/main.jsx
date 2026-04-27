@@ -1,7 +1,9 @@
+/* eslint-disable react-refresh/only-export-components -- entry file: AnalyticsGate + root render */
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import { LazyMotion, domMax } from 'framer-motion'
 import { ThemeProvider } from './context/ThemeContext'
 import RootErrorBoundary from './RootErrorBoundary.jsx'
 import { Analytics } from '@vercel/analytics/react'
@@ -29,12 +31,14 @@ function AnalyticsGate() {
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <RootErrorBoundary>
-      <BrowserRouter>
-        <ThemeProvider>
-          <AnalyticsGate />
-          <App />
-        </ThemeProvider>
-      </BrowserRouter>
+      <LazyMotion features={domMax} strict>
+        <BrowserRouter>
+          <ThemeProvider>
+            <AnalyticsGate />
+            <App />
+          </ThemeProvider>
+        </BrowserRouter>
+      </LazyMotion>
     </RootErrorBoundary>
   </StrictMode>,
 )

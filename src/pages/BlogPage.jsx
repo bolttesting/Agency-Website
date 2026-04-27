@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useSiteData } from '../context/SiteDataContext';
 import Seo from '../components/Seo';
@@ -33,28 +33,28 @@ export default function BlogPage() {
       <section className="blog-hero">
         <div className="blog-hero__glow" />
         <div className="blog-hero__content">
-          <motion.span
+          <m.span
             className="blog-hero__badge"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
             Insights & Updates
-          </motion.span>
-          <motion.h1
+          </m.span>
+          <m.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             Our Blog
-          </motion.h1>
-          <motion.p
+          </m.h1>
+          <m.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
           >
             Thoughts on development, design, and digital innovation.
-          </motion.p>
+          </m.p>
         </div>
       </section>
 
@@ -62,7 +62,7 @@ export default function BlogPage() {
         <div className="blog-posts__inner">
           <div className="blog-grid">
             {visiblePosts.map((post, i) => (
-              <motion.article
+              <m.article
                 key={post.id}
                 className={`blog-card ${i === 0 ? 'blog-card--featured' : ''}`}
                 initial={{ opacity: 0, y: 30 }}
@@ -92,7 +92,7 @@ export default function BlogPage() {
                     <span className="blog-card__read">Read more</span>
                   </div>
                 </Link>
-              </motion.article>
+              </m.article>
             ))}
           </div>
         </div>

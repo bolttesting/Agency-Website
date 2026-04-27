@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 export default function DreamProject() {
   const [email, setEmail] = useState('');
@@ -7,7 +7,7 @@ export default function DreamProject() {
   return (
     <section className="section dream">
       <div className="dream__inner">
-        <motion.div
+        <m.div
           className="dream__content"
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -19,8 +19,8 @@ export default function DreamProject() {
             Ready to bring your idea to life? Get in touch with our team and let's 
             discuss how we can help you achieve your goals.
           </p>
-        </motion.div>
-        <motion.div
+        </m.div>
+        <m.div
           className="dream__form"
           initial={{ opacity: 0, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -35,7 +35,7 @@ export default function DreamProject() {
           <button type="button" className="dream__btn">
             Get Started
           </button>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

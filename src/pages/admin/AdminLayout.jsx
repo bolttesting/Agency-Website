@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
-import { supabase } from '../../lib/supabase';
+import { ensureSupabase, isSupabaseConfigured } from '../../lib/supabase';
 import Seo from '../../components/Seo';
 import './Admin.css';
 
@@ -10,31 +10,54 @@ export default function AdminLayout() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!supabase) {
+    if (!isSupabaseConfigured()) {
       navigate('/admin/login', { replace: true });
-      setLoading(false);
-      return;
+      queueMicrotask(() => setLoading(false));
+      return undefined;
     }
-    supabase.auth.getSession()
-      .then(({ data: { session } }) => {
+
+    let subscription;
+    let cancelled = false;
+
+    void (async () => {
+      const client = await ensureSupabase();
+      if (cancelled) return;
+      if (!client) {
+        navigate('/admin/login', { replace: true });
+        setLoading(false);
+        return;
+      }
+      try {
+        const {
+          data: { session },
+        } = await client.auth.getSession();
+        if (cancelled) return;
         setUser(session?.user ?? null);
         setLoading(false);
         if (!session) navigate('/admin/login', { replace: true });
-      })
-      .catch((err) => {
+        const {
+          data: { subscription: sub },
+        } = client.auth.onAuthStateChange((_e, sessionNext) => {
+          setUser(sessionNext?.user ?? null);
+          if (!sessionNext) navigate('/admin/login', { replace: true });
+        });
+        subscription = sub;
+      } catch (err) {
         console.error('Auth check failed:', err);
         setLoading(false);
         navigate('/admin/login', { replace: true });
-      });
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_e, session) => {
-      setUser(session?.user ?? null);
-      if (!session) navigate('/admin/login', { replace: true });
-    });
-    return () => subscription?.unsubscribe();
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+      subscription?.unsubscribe();
+    };
   }, [navigate]);
 
   const handleLogout = async () => {
-    await supabase?.auth.signOut();
+    const client = await ensureSupabase();
+    await client?.auth.signOut();
     navigate('/admin/login');
   };
 

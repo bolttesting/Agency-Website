@@ -1,5 +1,5 @@
 import { useMemo, useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useSiteData } from '../context/SiteDataContext';
 import { CardStack } from './ui/card-stack';
@@ -53,7 +53,7 @@ export default function Clients() {
   return (
     <section className="section portfolio-home" id="portfolio">
       <div className="portfolio-home__wrap">
-        <motion.div
+        <m.div
           className="portfolio-home__top"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -65,7 +65,7 @@ export default function Clients() {
               View all <span aria-hidden>→</span>
             </Link>
           </div>
-        </motion.div>
+        </m.div>
 
         <div className="portfolio-home__stack">
           <CardStack

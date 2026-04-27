@@ -1,16 +1,19 @@
-# Allow all major AI crawlers
+# Allow all major AI crawlers; block admin (same as default group)
 User-agent: GPTBot
 Allow: /
+Disallow: /admin
 
 User-agent: Claude-Web
 Allow: /
+Disallow: /admin
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /admin
 
-# Allow all other crawlers
+# Don’t spend crawl budget on the admin app (HTML also uses noindex there)
 User-agent: *
-Allow: /
+Disallow: /admin
 
 # Sitemap location
 Sitemap: https://logixcontact.co.uk/sitemap.xml

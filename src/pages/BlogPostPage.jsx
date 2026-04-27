@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import DOMPurify from 'dompurify';
 import { useSiteData } from '../context/SiteDataContext';
 import Seo from '../components/Seo';
@@ -153,7 +153,7 @@ export default function BlogPostPage() {
         image={ogImage}
       />
       <article className="blog-post">
-        <motion.div
+        <m.div
           className="blog-post__header"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -181,18 +181,18 @@ export default function BlogPostPage() {
                 : ''}
             </time>
           </div>
-        </motion.div>
+        </m.div>
         {cover ? (
-          <motion.div
+          <m.div
             className="blog-post__cover-wrap"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.1, duration: 0.4 }}
           >
             <img className="blog-post__cover" src={cover} alt={post.title} />
-          </motion.div>
+          </m.div>
         ) : null}
-        <motion.div
+        <m.div
           className="blog-post__content"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

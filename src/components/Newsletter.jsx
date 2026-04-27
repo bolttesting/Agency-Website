@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import SlideButton from './ui/SlideButton';
-import { supabase } from '../lib/supabase';
+import { ensureSupabase } from '../lib/supabase';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -15,11 +15,12 @@ export default function Newsletter() {
     if (!EMAIL_RE.test(addr)) {
       throw new Error('Invalid email');
     }
-    if (!supabase) {
+    const client = await ensureSupabase();
+    if (!client) {
       throw new Error('Newsletter signup is not configured');
     }
     const normalized = addr.toLowerCase();
-    const { error } = await supabase.from('newsletter_subscribers').insert({ email: normalized });
+    const { error } = await client.from('newsletter_subscribers').insert({ email: normalized });
     // Ignore duplicate signup attempts (unique index)
     if (error && error.code !== '23505') {
       throw new Error(error.message || 'Signup failed');
@@ -30,15 +31,15 @@ export default function Newsletter() {
   return (
     <section className="section newsletter">
       <div className="section__inner newsletter__inner">
-        <motion.h2
+        <m.h2
           className="newsletter__title"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
           Join Our Daily Newsletter
-        </motion.h2>
-        <motion.form
+        </m.h2>
+        <m.form
           className="newsletter__form"
           onSubmit={(e) => e.preventDefault()}
           initial={{ opacity: 0, y: 20 }}
@@ -59,7 +60,7 @@ export default function Newsletter() {
             onConfirm={handleConfirm}
             hint="Slide to subscribe"
           />
-        </motion.form>
+        </m.form>
       </div>
     </section>
   );

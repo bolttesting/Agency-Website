@@ -7,11 +7,11 @@
  * project, add `@/lib/utils` (cn), then replace framer-motion imports with "motion/react".
  */
 import { useRef, useState, useId } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import './hover-footer.css';
 
-const MotionRadialGradient = motion.radialGradient;
-const MotionText = motion.text;
+const MotionRadialGradient = m.radialGradient;
+const MotionText = m.text;
 
 export function TextHoverEffect({
   text,

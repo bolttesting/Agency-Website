@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { m, useInView } from 'framer-motion';
 
 const projects = [
   {
@@ -30,7 +30,7 @@ const projects = [
 
 function ProjectCard({ project, index }) {
   return (
-    <motion.div
+    <m.div
       className="project-card"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -38,7 +38,7 @@ function ProjectCard({ project, index }) {
       transition={{ duration: 0.6, delay: index * 0.1 }}
       whileHover={{ scale: 1.02 }}
     >
-      <motion.div
+      <m.div
         className="project-card__gradient"
         style={{ background: project.gradient }}
         initial={{ opacity: 0 }}
@@ -48,19 +48,19 @@ function ProjectCard({ project, index }) {
         <span className="project-card__type">{project.type}</span>
         <h3 className="project-card__name">{project.name}</h3>
         <p className="project-card__tech">{project.tech}</p>
-        <motion.a
+        <m.a
           href="#"
           className="project-card__link"
           whileHover={{ x: 5 }}
         >
           View Project →
-        </motion.a>
+        </m.a>
       </div>
       <div className="project-card__code-preview">
         <span>// {project.name.toLowerCase()}.jsx</span>
         <span>export default function</span>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -71,7 +71,7 @@ export default function Portfolio() {
   return (
     <section className="section portfolio" id="portfolio" ref={ref}>
       <div className="section__inner">
-        <motion.div
+        <m.div
           className="section__header"
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -82,7 +82,7 @@ export default function Portfolio() {
           <p className="section__desc">
             Projects that define our craft and push boundaries.
           </p>
-        </motion.div>
+        </m.div>
 
         <div className="portfolio__grid">
           {projects.map((project, i) => (

@@ -1,6 +1,6 @@
 import { useId, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import Icon from '../Icons';
 import './card-hover-effect.css';
 
@@ -38,7 +38,7 @@ export function HoverEffect({ items, className = '' }: HoverEffectProps) {
           onMouseEnter={() => setHovered(i)}
         >
           {hovered === i ? (
-            <motion.div
+            <m.div
               layoutId={layoutId}
               className="card-hover-effect__highlight"
               transition={{ type: 'spring', stiffness: 420, damping: 32 }}

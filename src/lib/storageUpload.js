@@ -1,4 +1,4 @@
-import { supabase } from './supabase';
+import { ensureSupabase } from './supabase';
 
 const BUCKET = 'media';
 
@@ -10,6 +10,7 @@ const BUCKET = 'media';
  * @returns {Promise<string>} public URL
  */
 export async function uploadMediaFile(file, folder = 'uploads') {
+  const supabase = await ensureSupabase();
   if (!supabase) throw new Error('Supabase is not configured');
   const safeFolder = folder.replace(/[^a-z0-9-_]/gi, '') || 'uploads';
   const ext = (file.name && file.name.includes('.'))
@@ -31,5 +32,9 @@ export async function uploadMediaFile(file, folder = 'uploads') {
 }
 
 export function isStorageConfigured() {
-  return !!supabase;
+  return Boolean(
+    typeof import.meta !== 'undefined' &&
+      import.meta.env.VITE_SUPABASE_URL &&
+      import.meta.env.VITE_SUPABASE_ANON_KEY,
+  );
 }

@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from 'framer-motion';
+import { m, useReducedMotion } from 'framer-motion';
 import { Stars } from './Icons';
 import { useSiteData } from '../context/SiteDataContext';
 import { TestimonialsColumn } from './TestimonialsColumn';
@@ -39,7 +39,7 @@ export default function Testimonials() {
     <section className="section testimonials">
       <div className="testimonials__glow" />
       <div className="section__inner section__inner--testimonials">
-        <motion.div
+        <m.div
           className="testimonials__header"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -50,12 +50,12 @@ export default function Testimonials() {
           <h2 className="testimonials__title">Why Business Trust Us</h2>
           <p className="testimonials__subtitle">Client Success Stories</p>
           <span className="testimonials__accent-line" />
-        </motion.div>
+        </m.div>
 
         {reduceMotion ? (
           <div className="testimonials__grid">
             {testimonials.map((t, i) => (
-              <motion.div
+              <m.div
                 key={t.name}
                 className="testimonial-card"
                 initial={{ opacity: 0, y: 20 }}
@@ -86,7 +86,7 @@ export default function Testimonials() {
                     <span className="testimonial-card__role">{t.role}</span>
                   </div>
                 </div>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         ) : (

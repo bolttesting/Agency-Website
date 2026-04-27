@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useRef } from 'react'
-import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion'
+import { m, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion'
 import './about-tech-stack-arc.css'
 
 const IMG_WIDTH = 60
@@ -35,7 +35,7 @@ const lerp = (start, end, t) => start * (1 - t) + end * t
 
 function FlipCard({ src, index, label, target }) {
   return (
-    <motion.div
+    <m.div
       animate={{
         x: target.x,
         y: target.y,
@@ -52,7 +52,7 @@ function FlipCard({ src, index, label, target }) {
         transformStyle: 'preserve-3d',
       }}
     >
-      <motion.div
+      <m.div
         className="tech-flip-card__inner"
         style={{ transformStyle: 'preserve-3d', width: '100%', height: '100%', position: 'relative' }}
         transition={{ duration: 0.6, type: 'spring', stiffness: 260, damping: 20 }}
@@ -65,8 +65,8 @@ function FlipCard({ src, index, label, target }) {
           <span className="tech-flip-card__back-label">Tech</span>
           <span className="tech-flip-card__back-name">{label}</span>
         </div>
-      </motion.div>
-    </motion.div>
+      </m.div>
+    </m.div>
   )
 }
 
@@ -166,7 +166,7 @@ export default function AboutTechStackArc({ items = ABOUT_TECH_STACK_ITEMS }) {
       <div className="about-tech-arc__sticky">
         <div className="about-tech-arc__perspective">
           <div className="about-tech-arc__intro-text">
-            <motion.h1
+            <m.h1
               initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
               animate={
                 introPhase === 'circle' && morphValue < 0.5
@@ -176,8 +176,8 @@ export default function AboutTechStackArc({ items = ABOUT_TECH_STACK_ITEMS }) {
               transition={{ duration: 0.8 }}
             >
               Built on a modern tech stack
-            </motion.h1>
-            <motion.p
+            </m.h1>
+            <m.p
               initial={{ opacity: 0 }}
               animate={
                 introPhase === 'circle' && morphValue < 0.5 ? { opacity: 0.5 - morphValue } : { opacity: 0 }
@@ -185,16 +185,16 @@ export default function AboutTechStackArc({ items = ABOUT_TECH_STACK_ITEMS }) {
               transition={{ duration: 0.8, delay: 0.15 }}
             >
               Scroll to explore
-            </motion.p>
+            </m.p>
           </div>
 
-          <motion.div className="about-tech-arc__content" style={{ opacity: contentOpacity, y: contentY }}>
+          <m.div className="about-tech-arc__content" style={{ opacity: contentOpacity, y: contentY }}>
             <h2>Tools we ship with</h2>
             <p>
               From frontend frameworks to cloud and design — the technologies we use to deliver reliable products.
               Hover a card to flip and see the name.
             </p>
-          </motion.div>
+          </m.div>
 
           <div ref={stageRef} className="about-tech-arc__stage">
             {items.map((item, i) => {

@@ -1,8 +1,8 @@
 import { useState, lazy, Suspense } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import Icon from '../components/Icons';
 import { useSiteData } from '../context/SiteDataContext';
-import { supabase } from '../lib/supabase';
+import { ensureSupabase } from '../lib/supabase';
 import Seo from '../components/Seo';
 import { contactEmails, contactPhones, telHref } from '../utils/contactLines';
 import { parseFooterSocialLinks } from '../utils/footerSocialLinks';
@@ -37,8 +37,9 @@ export default function ContactPage() {
     e.preventDefault();
     setSubmitting(true);
     try {
-      if (supabase) {
-        await supabase.from('contact_submissions').insert({
+      const client = await ensureSupabase();
+      if (client) {
+        await client.from('contact_submissions').insert({
           name: form.name,
           email: form.email,
           phone: form.phone || null,
@@ -66,34 +67,34 @@ export default function ContactPage() {
       <section className="contact-hero">
         <div className="contact-hero__glow" />
         <div className="contact-hero__content">
-          <motion.span
+          <m.span
             className="contact-hero__badge"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
             We'd Love to Hear From You
-          </motion.span>
-          <motion.h1
+          </m.span>
+          <m.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             Get in Touch
-          </motion.h1>
-          <motion.p
+          </m.h1>
+          <m.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
           >
             Have a project in mind? Let's discuss how we can help bring your ideas to life.
-          </motion.p>
+          </m.p>
         </div>
       </section>
 
       <section className="contact-main">
         <div className="contact-main__inner">
-          <motion.div
+          <m.div
             className="contact-info"
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -147,9 +148,9 @@ export default function ContactPage() {
                 ))}
               </div>
             ) : null}
-          </motion.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             id="contact-form"
             className="contact-form-wrapper"
             initial={{ opacity: 0, x: 30 }}
@@ -158,7 +159,7 @@ export default function ContactPage() {
           >
             <h2>Send a Message</h2>
             {submitted ? (
-              <motion.div
+              <m.div
                 className="contact-success"
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -166,7 +167,7 @@ export default function ContactPage() {
                 <span className="contact-success__icon"><Icon name="check" size={40} /></span>
                 <h3>Thank You!</h3>
                 <p>We've received your message and will get back to you soon.</p>
-              </motion.div>
+              </m.div>
             ) : (
               <form className="contact-form" onSubmit={handleSubmit}>
                 <div className="contact-form__row">
@@ -231,7 +232,7 @@ export default function ContactPage() {
                 </button>
               </form>
             )}
-          </motion.div>
+          </m.div>
         </div>
       </section>
 

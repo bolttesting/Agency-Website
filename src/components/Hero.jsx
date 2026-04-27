@@ -1,7 +1,8 @@
 import { lazy, Suspense, useMemo } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { m, useReducedMotion } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
 import { useSiteData } from '../context/SiteDataContext';
+import { useIdleReady } from '../hooks/useIdleReady';
 import ButtonCrossArrow from './ui/ButtonCrossArrow';
 import ButtonAnimatedGradient from './ui/ButtonAnimatedGradient';
 import AvatarGroup from './ui/avatar-group';
@@ -97,6 +98,7 @@ function heroAvatarsFromTeam(team) {
 
 export default function Hero() {
   const reduceMotion = useReducedMotion();
+  const idleReady = useIdleReady({ timeout: 2200 });
   const { theme } = useTheme();
   const { team } = useSiteData();
   const avatarItems = useMemo(() => heroAvatarsFromTeam(team), [team]);
@@ -104,7 +106,7 @@ export default function Hero() {
 
   return (
     <section className="hero hero--centered" id="hero">
-      {!reduceMotion && (
+      {!reduceMotion && idleReady && (
         <Suspense fallback={null}>
           <ShaderAnimation className="hero__shader" />
         </Suspense>
@@ -114,17 +116,17 @@ export default function Hero() {
       <div className="hero__glow hero__glow--2" />
       <div className="hero__glow hero__glow--3" />
       <div className="hero__grid">
-        <motion.div
+        <m.div
           className="hero__content"
           variants={staggerContainer}
           initial="hidden"
           animate="show"
         >
-          <motion.div className="hero__badge" variants={fadeUp(reduceMotion)}>
+          <m.div className="hero__badge" variants={fadeUp(reduceMotion)}>
             <span className="hero__badge-dot" />
             Full-service product studio
-          </motion.div>
-          <motion.h1
+          </m.div>
+          <m.h1
             className={`hero__title${reduceMotion ? '' : ' hero__title--animated'}`}
             variants={fadeUp(reduceMotion)}
           >
@@ -152,33 +154,33 @@ export default function Hero() {
                 </span>
               </>
             )}
-          </motion.h1>
-          <motion.p className="hero__desc" variants={fadeUp(reduceMotion)}>
+          </m.h1>
+          <m.p className="hero__desc" variants={fadeUp(reduceMotion)}>
             Strategy, product design, and engineering in one team — fewer handoffs, clearer owners, and a
             path from first workshop to stable release.
-          </motion.p>
-          <motion.ul className="hero__pills" variants={fadeUp(reduceMotion)} aria-label="Focus areas">
+          </m.p>
+          <m.ul className="hero__pills" variants={fadeUp(reduceMotion)} aria-label="Focus areas">
             {PILL_LABELS.map((label) => (
               <li key={label} className="hero__pill">
                 {label}
               </li>
             ))}
-          </motion.ul>
-          <motion.div className="hero__cta" variants={fadeUp(reduceMotion)}>
+          </m.ul>
+          <m.div className="hero__cta" variants={fadeUp(reduceMotion)}>
             <ButtonCrossArrow to="/contact" variant={ctaVariant}>
               Plan a project
             </ButtonCrossArrow>
             <ButtonAnimatedGradient to="/services/app-development" variant={ctaVariant}>
               See capabilities
             </ButtonAnimatedGradient>
-          </motion.div>
-          <motion.p className="hero__footnote" variants={fadeUp(reduceMotion)}>
+          </m.div>
+          <m.p className="hero__footnote" variants={fadeUp(reduceMotion)}>
             Typical kickoff: two-week discovery · then weekly stakeholder demos
-          </motion.p>
-        </motion.div>
+          </m.p>
+        </m.div>
       </div>
       {!reduceMotion && (
-        <motion.div
+        <m.div
           className="hero__scroll"
           initial={{ opacity: 0, transform: 'translateX(-50%) translateY(8px)' }}
           animate={{ opacity: 1, transform: 'translateX(-50%) translateY(0)' }}
@@ -186,11 +188,11 @@ export default function Hero() {
         >
           <span className="hero__scroll-text">Scroll</span>
           <span className="hero__scroll-line" />
-        </motion.div>
+        </m.div>
       )}
 
       <div className="hero__avatar-slot">
-        <motion.div
+        <m.div
           className="hero__avatar-group"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -199,7 +201,7 @@ export default function Hero() {
           <div className="hero__avatar-group__inner" aria-label="Team members">
             <AvatarGroup items={avatarItems} maxVisible={5} size="sm" />
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

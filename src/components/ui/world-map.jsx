@@ -1,5 +1,5 @@
 import { useRef, useState, useMemo, useId } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import DottedMap from 'dotted-map';
 import './world-map.css';
 
@@ -107,7 +107,7 @@ export function WorldMap({
 
           return (
             <g key={`path-group-${i}`}>
-              <motion.path
+              <m.path
                 d={pathD}
                 fill="none"
                 stroke={`url(#${gradId})`}
@@ -172,7 +172,7 @@ export function WorldMap({
                 </g>
 
                 {showLabels && dot.start.label ? (
-                  <motion.g
+                  <m.g
                     initial={{ opacity: 0, y: 5 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5 * i + 0.3, duration: 0.5 }}
@@ -183,7 +183,7 @@ export function WorldMap({
                         <span>{dot.start.label}</span>
                       </div>
                     </foreignObject>
-                  </motion.g>
+                  </m.g>
                 ) : null}
               </g>
 
@@ -214,7 +214,7 @@ export function WorldMap({
                 </g>
 
                 {showLabels && dot.end.label ? (
-                  <motion.g
+                  <m.g
                     initial={{ opacity: 0, y: 5 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5 * i + 0.5, duration: 0.5 }}
@@ -225,7 +225,7 @@ export function WorldMap({
                         <span>{dot.end.label}</span>
                       </div>
                     </foreignObject>
-                  </motion.g>
+                  </m.g>
                 ) : null}
               </g>
             </g>
@@ -235,7 +235,7 @@ export function WorldMap({
 
       <AnimatePresence>
         {hoveredLocation ? (
-          <motion.div
+          <m.div
             key={hoveredLocation}
             className="world-map__tooltip"
             initial={{ opacity: 0, y: 10 }}
@@ -243,7 +243,7 @@ export function WorldMap({
             exit={{ opacity: 0, y: 10 }}
           >
             {hoveredLocation}
-          </motion.div>
+          </m.div>
         ) : null}
       </AnimatePresence>
     </div>

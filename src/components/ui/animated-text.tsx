@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { motion, type Variants } from 'framer-motion'
+import { m, type Variants } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import './animated-text.css'
 
@@ -105,24 +105,24 @@ const AnimatedText = React.forwardRef<HTMLDivElement, AnimatedTextProps>(
         {...props}
       >
         <div className="animated-text__relative">
-          <motion.div
+          <m.div
             className={cn('animated-text__letters animated-text__typo', textClassName)}
             variants={container}
             initial="hidden"
             animate={replay ? 'visible' : 'hidden'}
           >
             {letters.map((letter, index) => (
-              <motion.span
+              <m.span
                 key={`${index}-${letter}`}
                 className="animated-text__letter"
                 variants={child}
               >
                 {letter === ' ' ? '\u00A0' : letter}
-              </motion.span>
+              </m.span>
             ))}
-          </motion.div>
+          </m.div>
           {!hideUnderline && (
-            <motion.div
+            <m.div
               variants={lineVariants}
               initial="hidden"
               animate={replay ? 'visible' : 'hidden'}

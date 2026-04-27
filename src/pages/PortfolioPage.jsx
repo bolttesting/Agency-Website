@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useSiteData } from '../context/SiteDataContext';
 import Seo from '../components/Seo';
@@ -29,28 +29,28 @@ export default function PortfolioPage() {
       <section className="portfolio-hero">
         <div className="portfolio-hero__glow" />
         <div className="portfolio-hero__content">
-          <motion.span
+          <m.span
             className="portfolio-hero__badge"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
             Our Work
-          </motion.span>
-          <motion.h1
+          </m.span>
+          <m.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             Portfolio
-          </motion.h1>
-          <motion.p
+          </m.h1>
+          <m.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.25 }}
           >
             {filteredProjects.length} project{filteredProjects.length !== 1 ? 's' : ''} delivered across web, mobile, and digital platforms.
-          </motion.p>
+          </m.p>
         </div>
       </section>
 
@@ -70,7 +70,7 @@ export default function PortfolioPage() {
         <div className="portfolio-grid">
           <AnimatePresence mode="wait">
             {filteredProjects.map((project, i) => (
-              <motion.article
+              <m.article
                 key={project.id}
                 className="portfolio-card"
                 layout
@@ -92,7 +92,7 @@ export default function PortfolioPage() {
                     <p className="portfolio-card__tech">{project.tech}</p>
                   </div>
                 </Link>
-              </motion.article>
+              </m.article>
             ))}
           </AnimatePresence>
         </div>

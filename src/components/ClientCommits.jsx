@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import RadialOrbitalTimeline from './RadialOrbitalTimeline';
 
 /** Process steps as orbital timeline nodes (icons from ./Icons.jsx). */
@@ -105,7 +105,7 @@ export default function ClientCommits() {
   return (
     <section className="section commits">
       <div className="commits__inner commits__inner--orbital">
-        <motion.div
+        <m.div
           className="commits__header"
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -115,7 +115,7 @@ export default function ClientCommits() {
           <p className="commits__subtitle">
             How we work—explore each phase on the orbit. Click a node for details; related steps pulse.
           </p>
-        </motion.div>
+        </m.div>
 
         <div className="commits__orbital-wrap">
           <p className="commits__orbital-hint">How We Work</p>

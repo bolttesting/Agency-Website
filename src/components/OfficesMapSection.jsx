@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
 import { useSiteData } from '../context/SiteDataContext';
 import { WorldMap } from './ui/world-map';
@@ -56,7 +56,7 @@ export default function OfficesMapSection() {
     <section className="section offices-map" id="offices" aria-labelledby="offices-map-heading">
       <div className="offices-map__glow" aria-hidden />
       <div className="offices-map__inner">
-        <motion.header
+        <m.header
           className="offices-map__header"
           initial={{ opacity: 0, y: 26 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -70,9 +70,9 @@ export default function OfficesMapSection() {
           <p className="offices-map__lead">
             Three hubs — United Kingdom, UAE, and Pakistan. Reach the team that fits your time zone.
           </p>
-        </motion.header>
+        </m.header>
 
-        <motion.div
+        <m.div
           className="offices-map__map-wrap"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -88,14 +88,14 @@ export default function OfficesMapSection() {
             animationDuration={2}
             loop
           />
-        </motion.div>
+        </m.div>
 
         <ul className="offices-map__grid">
           {OFFICE_LOCATIONS.map((office, index) => (
             (() => {
               const phone = office.phone || fallbackPhone;
               return (
-            <motion.li
+            <m.li
               key={office.id}
               className="offices-map__card"
               initial={{ opacity: 0, y: 16 }}
@@ -113,7 +113,7 @@ export default function OfficesMapSection() {
                 </a>
               ) : null}
               <p className="offices-map__address">{office.address}</p>
-            </motion.li>
+            </m.li>
               );
             })()
           ))}

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { m, AnimatePresence, useReducedMotion } from 'framer-motion';
 import './card-stack.css';
 
 function cn(...classes) {
@@ -217,7 +217,7 @@ export function CardStack({
                 : {};
 
               return (
-                <motion.div
+                <m.div
                   key={item.id}
                   className={cn(
                     'card-stack__card',
@@ -266,7 +266,7 @@ export function CardStack({
                   >
                     {renderCard ? renderCard(item, { active: isActive }) : <DefaultFanCard item={item} />}
                   </div>
-                </motion.div>
+                </m.div>
               );
             })}
           </AnimatePresence>

@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArcGalleryHero } from './ui/arc-gallery-hero';
 import './TechStackArcSection.css';
@@ -62,7 +62,7 @@ export default function TechStackArcSection() {
     <section className="section tech-stack-arc" id="tech-stack">
       <div className="tech-stack-arc__glow" aria-hidden />
       <div className="tech-stack-arc__inner">
-        <motion.header
+        <m.header
           className="tech-stack-arc__header"
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -75,9 +75,9 @@ export default function TechStackArcSection() {
             A modern, proven toolkit for fast interfaces, solid APIs, and products that scale — tuned to each
             project&apos;s needs.
           </p>
-        </motion.header>
+        </m.header>
 
-        <motion.div
+        <m.div
           className="tech-stack-arc__arc-wrap"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -96,9 +96,9 @@ export default function TechStackArcSection() {
             cardSizeSm={66}
             cardTiltFactor={0.2}
           />
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           className="tech-stack-arc__footer"
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -111,7 +111,7 @@ export default function TechStackArcSection() {
           <Link to="/contact" className="tech-stack-arc__cta">
             Start a conversation <span aria-hidden>→</span>
           </Link>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

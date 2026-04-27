@@ -41,6 +41,7 @@ export default defineConfig(({ mode }) => {
       },
     },
     build: {
+      target: 'es2022',
       rollupOptions: {
         output: {
           manualChunks(id) {
@@ -49,6 +50,7 @@ export default defineConfig(({ mode }) => {
             if (id.includes('@supabase')) return 'supabase'
             if (id.includes('three')) return 'three'
             if (id.includes('cobe')) return 'cobe'
+            if (id.includes('dotted-map')) return 'dotted-map'
             if (id.includes('lucide-react')) return 'icons'
             if (id.includes('dompurify')) return 'dompurify'
             if (id.includes('react-dom') || id.includes('react-router')) return 'react-vendor'

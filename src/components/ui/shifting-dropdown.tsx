@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
 import { ArrowRight, ChevronDown } from 'lucide-react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { servicesMenu } from '../../data/servicesData';
 import Icon from '../Icons';
@@ -131,7 +131,7 @@ export default function ServicesDropdown() {
 
         <AnimatePresence>
           {open ? (
-            <motion.div
+            <m.div
               key="mega"
               ref={panelRef}
               id={`${overlayId}-overlay-content`}
@@ -147,13 +147,13 @@ export default function ServicesDropdown() {
               <div className="shifting-dropdown__bridge" aria-hidden />
               <Nub overlayId={overlayId} />
               <div className="shifting-dropdown__panel-slide">
-                <motion.div
+                <m.div
                   initial={{ opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.2, ease: 'easeOut' }}
                 >
                   <ServicesPanelGrid />
-                </motion.div>
+                </m.div>
               </div>
               <Link
                 to={servicesMenu[0]?.path ?? '/services/app-development'}
@@ -162,7 +162,7 @@ export default function ServicesDropdown() {
                 <span>View all capabilities</span>
                 <ArrowRight size={16} aria-hidden />
               </Link>
-            </motion.div>
+            </m.div>
           ) : null}
         </AnimatePresence>
       </div>

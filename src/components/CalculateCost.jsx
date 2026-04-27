@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import Icon from './Icons';
 import { servicesMenu } from '../data/servicesData';
 import ButtonTextChange from './ui/ButtonTextChange';
@@ -16,7 +16,7 @@ export default function CalculateCost() {
       <div className="calculate__glow calculate__glow--1" />
       <div className="calculate__glow calculate__glow--2" />
       <div className="calculate__inner">
-        <motion.div
+        <m.div
           className="calculate__content"
           initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -42,8 +42,8 @@ export default function CalculateCost() {
               Chat Live
             </ButtonTextChange>
           </div>
-        </motion.div>
-        <motion.form
+        </m.div>
+        <m.form
           className="calculate__form-wrap"
           onSubmit={handleSubmit}
           initial={{ opacity: 0, x: 40 }}
@@ -92,7 +92,7 @@ export default function CalculateCost() {
               Submit Now
             </ButtonTextChange>
           </div>
-        </motion.form>
+        </m.form>
       </div>
     </section>
   );

@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { useSiteData } from '../context/SiteDataContext';
 import Seo from '../components/Seo';
 import { truncateMeta } from '../config/seo';
@@ -44,7 +44,7 @@ export default function PortfolioProjectPage() {
         keywords={`${project.name}, portfolio, ${project.tech || ''}, ${project.type || ''}, UK web agency, Logix Contact`}
         image={project.image}
       />
-      <motion.article
+      <m.article
         className="portfolio-project"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -95,7 +95,7 @@ export default function PortfolioProjectPage() {
           {(details?.challenge || details?.solution) && (
             <section className="portfolio-project__section">
               {details.challenge && (
-                <motion.div
+                <m.div
                   className="portfolio-project__block"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -103,10 +103,10 @@ export default function PortfolioProjectPage() {
                 >
                   <h3>The Challenge</h3>
                   <p>{details.challenge}</p>
-                </motion.div>
+                </m.div>
               )}
               {details.solution && (
-                <motion.div
+                <m.div
                   className="portfolio-project__block"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -114,7 +114,7 @@ export default function PortfolioProjectPage() {
                 >
                   <h3>Our Solution</h3>
                   <p>{details.solution}</p>
-                </motion.div>
+                </m.div>
               )}
             </section>
           )}
@@ -125,7 +125,7 @@ export default function PortfolioProjectPage() {
               <h2 className="portfolio-project__section-title">Key Features</h2>
               <div className="portfolio-project__features">
                 {details.features.map((feat, i) => (
-                  <motion.div
+                  <m.div
                     key={feat.title}
                     className="portfolio-project__feature"
                     initial={{ opacity: 0, y: 20 }}
@@ -135,7 +135,7 @@ export default function PortfolioProjectPage() {
                   >
                     <h4>{feat.title}</h4>
                     <p>{feat.desc}</p>
-                  </motion.div>
+                  </m.div>
                 ))}
               </div>
             </section>
@@ -159,7 +159,7 @@ export default function PortfolioProjectPage() {
               <h2 className="portfolio-project__section-title">Results</h2>
               <div className="portfolio-project__results">
                 {details.results.map((r, i) => (
-                  <motion.div
+                  <m.div
                     key={r.label}
                     className="portfolio-project__result"
                     initial={{ opacity: 0, scale: 0.95 }}
@@ -169,7 +169,7 @@ export default function PortfolioProjectPage() {
                   >
                     <span className="portfolio-project__result-value">{r.value}</span>
                     <span className="portfolio-project__result-label">{r.label}</span>
-                  </motion.div>
+                  </m.div>
                 ))}
               </div>
             </section>
@@ -181,7 +181,7 @@ export default function PortfolioProjectPage() {
               <h2 className="portfolio-project__section-title">Gallery</h2>
               <div className="portfolio-project__gallery">
                 {details.gallery.map((img, i) => (
-                  <motion.div
+                  <m.div
                     key={i}
                     className="portfolio-project__gallery-item"
                     initial={{ opacity: 0 }}
@@ -190,7 +190,7 @@ export default function PortfolioProjectPage() {
                     transition={{ delay: i * 0.1 }}
                   >
                     <img src={img} alt={`${project.name} - screenshot ${i + 1}`} />
-                  </motion.div>
+                  </m.div>
                 ))}
               </div>
             </section>
@@ -198,7 +198,7 @@ export default function PortfolioProjectPage() {
 
           {/* Testimonial */}
           {details?.testimonial && (
-            <motion.blockquote
+            <m.blockquote
               className="portfolio-project__testimonial"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -206,7 +206,7 @@ export default function PortfolioProjectPage() {
             >
               <p>"{details.testimonial.quote}"</p>
               <cite>— {details.testimonial.author}</cite>
-            </motion.blockquote>
+            </m.blockquote>
           )}
         </div>
 
@@ -225,7 +225,7 @@ export default function PortfolioProjectPage() {
             </div>
           </div>
         )}
-      </motion.article>
+      </m.article>
     </main>
   );
 }

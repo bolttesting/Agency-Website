@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
-import { supabase, isSupabaseConfigured } from '../lib/supabase';
+import { ensureSupabase, isSupabaseConfigured } from '../lib/supabase';
 import { portfolioProjects, portfolioProjectDetails } from '../data/portfolioData';
 import { servicesMenu, servicePageContent } from '../data/servicesData';
 
@@ -53,15 +53,16 @@ export function SiteDataProvider({ children }) {
   const [useSupabase, setUseSupabase] = useState(false);
 
   const loadFromSupabase = useCallback(async () => {
-    if (!supabase) return false;
+    const client = await ensureSupabase();
+    if (!client) return false;
     try {
       const [portRes, blogRes, teamRes, testRes, settingsRes, subsRes] = await Promise.all([
-        supabase.from('portfolio').select('*').order('sort_order'),
-        supabase.from('blog_posts').select('*').order('date', { ascending: false }),
-        supabase.from('team_members').select('*').order('sort_order'),
-        supabase.from('testimonials').select('*').order('sort_order'),
-        supabase.from('site_settings').select('*').single(),
-        supabase.from('contact_submissions').select('*').order('created_at', { ascending: false }),
+        client.from('portfolio').select('*').order('sort_order'),
+        client.from('blog_posts').select('*').order('date', { ascending: false }),
+        client.from('team_members').select('*').order('sort_order'),
+        client.from('testimonials').select('*').order('sort_order'),
+        client.from('site_settings').select('*').single(),
+        client.from('contact_submissions').select('*').order('created_at', { ascending: false }),
       ]);
 
       // Use DB rows only (including empty arrays). Static fallbacks use non-UUID ids and break admin saves against Supabase.
@@ -100,7 +101,7 @@ export function SiteDataProvider({ children }) {
       if (settingsRes.data) setSettings({ ...staticSettings, ...settingsRes.data });
       if (subsRes.data) setContactSubmissions(subsRes.data);
 
-      const svcRes = await supabase.from('services').select('*').order('sort_order');
+      const svcRes = await client.from('services').select('*').order('sort_order');
       if (Array.isArray(svcRes.data) && svcRes.data.length > 0) setServices(svcRes.data);
       else setServices(servicesMenu);
 
@@ -113,9 +114,11 @@ export function SiteDataProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    (async () => {
+    let cancelled = false;
+    const run = async () => {
       setLoading(true);
       const supabaseLoadOk = await loadFromSupabase();
+      if (cancelled) return;
       setUseSupabase(supabaseLoadOk);
 
       if (!supabaseLoadOk) {
@@ -127,7 +130,23 @@ export function SiteDataProvider({ children }) {
         setServices(servicesMenu);
       }
       setLoading(false);
-    })();
+    };
+
+    const start = () => {
+      void run();
+    };
+    if (typeof window !== 'undefined' && typeof window.requestIdleCallback === 'function') {
+      const id = window.requestIdleCallback(start, { timeout: 1200 });
+      return () => {
+        cancelled = true;
+        window.cancelIdleCallback(id);
+      };
+    }
+    const t = setTimeout(start, 0);
+    return () => {
+      cancelled = true;
+      clearTimeout(t);
+    };
   }, [loadFromSupabase]);
 
   /** Public site: DB projects when any exist, else original `portfolioData` (admin still uses `portfolio` only). */

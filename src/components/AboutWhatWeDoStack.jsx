@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { m, useScroll, useTransform } from 'framer-motion'
 import './about-what-we-do-stack.css'
 
 function StackingCard({ i, title, description, image, color, progress, range, targetScale }) {
@@ -19,7 +19,7 @@ function StackingCard({ i, title, description, image, color, progress, range, ta
       className="about-wedo-stack-card"
       style={{ zIndex: i + 1 }}
     >
-      <motion.div
+      <m.div
         className="about-wedo-stack-card__surface"
         style={{
           backgroundColor: color,
@@ -42,12 +42,12 @@ function StackingCard({ i, title, description, image, color, progress, range, ta
             </Link>
           </div>
           <div className="about-wedo-stack-card__img-shell">
-            <motion.div className="about-wedo-stack-card__img-motion" style={{ scale: imageScale }}>
+            <m.div className="about-wedo-stack-card__img-motion" style={{ scale: imageScale }}>
               <img src={image} alt={title} className="about-wedo-stack-card__img" loading={i < 2 ? 'eager' : 'lazy'} />
-            </motion.div>
+            </m.div>
           </div>
         </div>
-      </motion.div>
+      </m.div>
     </div>
   )
 }
@@ -108,7 +108,7 @@ export default function AboutWhatWeDoStack({ items }) {
           })}
         </div>
 
-        <motion.div
+        <m.div
           className="about-wedo-stack__footer-cta"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -117,7 +117,7 @@ export default function AboutWhatWeDoStack({ items }) {
           <Link to="/#services" className="about-btn about-btn--purple">
             Explore Services
           </Link>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   )

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import {
-  motion,
+  m,
   useScroll,
   useTransform,
   useMotionValue,
@@ -84,9 +84,9 @@ export default function ScrollBaseAnimation({
 
   return (
     <div className="scroll-text-marquee">
-      <motion.div className={mergedClassName} style={{ x, display: 'inline-block', whiteSpace: 'nowrap' }}>
+      <m.div className={mergedClassName} style={{ x, display: 'inline-block', whiteSpace: 'nowrap' }}>
         {text}
-      </motion.div>
+      </m.div>
     </div>
   );
 }

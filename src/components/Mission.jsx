@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import Icon from './Icons';
 import { CpuArchitecture } from './CpuArchitecture';
 
@@ -15,7 +15,7 @@ export default function Mission() {
       <div className="mission__glow mission__glow--1" />
       <div className="mission__glow mission__glow--2" />
       <div className="mission__inner">
-        <motion.div
+        <m.div
           className="mission__visual"
           initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -25,8 +25,8 @@ export default function Mission() {
           <div className="mission__visual-wrap mission__visual-wrap--cpu">
             <CpuArchitecture text="LC" className="mission__cpu-arch" />
           </div>
-        </motion.div>
-        <motion.div
+        </m.div>
+        <m.div
           className="mission__content"
           initial={{ opacity: 0, x: 40 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -45,7 +45,7 @@ export default function Mission() {
           </p>
           <div className="mission__stats">
             {stats.map((stat, i) => (
-              <motion.div
+              <m.div
                 key={stat.label}
                 className="mission__stat"
                 initial={{ opacity: 0, y: 24 }}
@@ -61,10 +61,10 @@ export default function Mission() {
                   <span className="mission__stat-value">{stat.value}</span>
                   <span className="mission__stat-label">{stat.label}</span>
                 </div>
-              </motion.div>
+              </m.div>
             ))}
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import { unsplashAvatarImgProps } from '@/utils/unsplashResponsive'
 import './avatar-group.css'
@@ -57,7 +57,7 @@ function AvatarSlot({
     >
       <AnimatePresence mode="popLayout">
         {isHovered ? (
-          <motion.div
+          <m.div
             key="tip"
             role="tooltip"
             className="avatar-group__tooltip"
@@ -72,11 +72,11 @@ function AvatarSlot({
           >
             <span className="avatar-group__tooltip-name">{item.name}</span>
             <span className="avatar-group__tooltip-role">{item.designation}</span>
-          </motion.div>
+          </m.div>
         ) : null}
       </AnimatePresence>
 
-      <motion.div
+      <m.div
         whileHover={{ scale: 1.05 }}
         transition={{ type: 'spring', stiffness: 200, damping: 15 }}
         style={{ position: 'relative', zIndex: isHovered ? 100 : undefined }}
@@ -101,7 +101,7 @@ function AvatarSlot({
             />
           </span>
         </button>
-      </motion.div>
+      </m.div>
     </div>
   )
 }
@@ -138,14 +138,14 @@ export default function AvatarGroup({
         />
       ))}
       {remainingCount > 0 ? (
-        <motion.div
+        <m.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           className="avatar-group__more"
           aria-label={`${remainingCount} more team members`}
         >
           +{remainingCount}
-        </motion.div>
+        </m.div>
       ) : null}
     </div>
   )

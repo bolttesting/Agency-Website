@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { filterSearchCatalog, useSearchCatalog } from '../hooks/useSearchCatalog';
 import './NavbarSearch.css';
 
@@ -37,7 +37,7 @@ export default function NavbarSearch({ open, onClose }) {
     <AnimatePresence>
       {open ? (
         <>
-          <motion.div
+          <m.div
             key="navbar-search-backdrop"
             className="navbar-search-backdrop"
             role="presentation"
@@ -48,7 +48,7 @@ export default function NavbarSearch({ open, onClose }) {
             onClick={onClose}
           />
           <div key="navbar-search-shell" className="navbar-search-shell">
-            <motion.div
+            <m.div
               key="navbar-search-panel"
               className="navbar-search"
               role="dialog"
@@ -103,7 +103,7 @@ export default function NavbarSearch({ open, onClose }) {
               )}
             </ul>
             <div className="navbar-search__foot">Navigate to a page or project. Shortcut: Ctrl/⌘ K</div>
-            </motion.div>
+            </m.div>
           </div>
         </>
       ) : null}

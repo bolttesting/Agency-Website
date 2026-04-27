@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import Icon from '../components/Icons'
 import Testimonials from '../components/Testimonials'
 import { FloatingIconsHero } from '../components/ui/FloatingIconsHero'
@@ -178,7 +178,7 @@ export default function AboutPage() {
       {/* How We Work */}
       <section className="about-section about-section--alt">
         <div className="about-section__inner">
-          <motion.div
+          <m.div
             className="about-section__header"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -189,10 +189,10 @@ export default function AboutPage() {
             <p className="about-section__subtitle">
               Our comprehensive approach ensures seamless project execution and client satisfaction
             </p>
-          </motion.div>
+          </m.div>
           <div className="about-process">
             {processSteps.map((step, i) => (
-              <motion.div
+              <m.div
                 key={step.name}
                 className="about-process__step"
                 initial={{ opacity: 0, y: 24 }}
@@ -209,7 +209,7 @@ export default function AboutPage() {
                   <h3 className="about-process__title">{step.name}</h3>
                   <p className="about-process__desc">{step.desc}</p>
                 </div>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </div>
@@ -219,7 +219,7 @@ export default function AboutPage() {
       <section className="about-section about-section--timeline">
         <div className="about-section__glow about-section__glow--blue" />
         <div className="about-section__inner">
-          <motion.div
+          <m.div
             className="about-section__header"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -231,11 +231,11 @@ export default function AboutPage() {
               A timeline of milestones and achievements that define our success
             </p>
             <span className="about-section__accent-line" />
-          </motion.div>
+          </m.div>
           <div className="about-timeline">
             <div className="about-timeline__line" />
             {timeline.map((item, i) => (
-              <motion.div
+              <m.div
                 key={item.year}
                 className={`about-timeline__item about-timeline__item--${i % 2 === 0 ? 'left' : 'right'}`}
                 initial={{ opacity: 0, x: i % 2 === 0 ? -24 : 24 }}
@@ -249,7 +249,7 @@ export default function AboutPage() {
                   <h3>{item.title}</h3>
                   <p>{item.desc}</p>
                 </div>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </div>
@@ -258,7 +258,7 @@ export default function AboutPage() {
       {/* Our Values — expanding image cards */}
       <section className="about-section about-section--alt about-section--expanding-values">
         <div className="about-section__inner">
-          <motion.div
+          <m.div
             className="about-section__header"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -269,7 +269,7 @@ export default function AboutPage() {
             <p className="about-section__subtitle">
               Hover, focus, or tap a card to expand it. Our core values shape every decision we make.
             </p>
-          </motion.div>
+          </m.div>
           <div className="about-expanding-values">
             <ExpandingCards items={ourValueCards} defaultActiveIndex={0} />
           </div>
@@ -279,7 +279,7 @@ export default function AboutPage() {
       {/* Tech stack — arc + flip cards (scroll-scrubbed) */}
       <section className="about-section about-section--tech-arc">
         <div className="about-section__inner">
-          <motion.div
+          <m.div
             className="about-section__header"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -291,7 +291,7 @@ export default function AboutPage() {
               Leveraging cutting-edge technologies to build future-ready solutions. Scroll the section below to see
               icons assemble into an arc.
             </p>
-          </motion.div>
+          </m.div>
         </div>
         <AboutTechStackArc />
       </section>
@@ -299,7 +299,7 @@ export default function AboutPage() {
       {/* Meet Our Team — profile card carousel */}
       <section className="about-section about-section--alt" id="team">
         <div className="about-section__inner">
-          <motion.div
+          <m.div
             className="about-section__header"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -310,7 +310,7 @@ export default function AboutPage() {
             <p className="about-section__subtitle">
               Faces behind the work — use the arrows or dots to browse profiles.
             </p>
-          </motion.div>
+          </m.div>
           <ProfileCardTestimonialCarousel items={teamProfileCarouselItems} />
         </div>
       </section>

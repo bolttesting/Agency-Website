@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { motion, useMotionValue, useSpring } from 'framer-motion'
+import { m, useMotionValue, useSpring } from 'framer-motion'
 import {
   IconGoogle,
   IconApple,
@@ -79,7 +79,7 @@ function FloatingIcon({ iconData, index }) {
   }
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       className="floating-icons-hero__icon-wrap"
       style={{
@@ -95,7 +95,7 @@ function FloatingIcon({ iconData, index }) {
         ease: [0.22, 1, 0.36, 1],
       }}
     >
-      <motion.div
+      <m.div
         className="floating-icons-hero__icon-inner"
         animate={{
           y: [0, -8, 0, 8, 0],
@@ -110,8 +110,8 @@ function FloatingIcon({ iconData, index }) {
         }}
       >
         <Icon className="text-ink" aria-hidden />
-      </motion.div>
-    </motion.div>
+      </m.div>
+    </m.div>
   )
 }
 

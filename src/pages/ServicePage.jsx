@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import Icon from '../components/Icons';
 import { useTheme } from '../context/ThemeContext';
 import { servicesMenu, servicePageContent, subServicePageContent } from '../data/servicesData';
@@ -117,7 +117,7 @@ export default function ServicePage() {
         <div className={`service-hero__content ${subItem ? 'service-hero__content--sub' : ''}`}>
           {subItem ? (
             <div className="sub-hero">
-              <motion.div
+              <m.div
                 className="sub-hero__left"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -137,9 +137,9 @@ export default function ServicePage() {
                     Back to {service.title}
                   </Link>
                 </div>
-              </motion.div>
+              </m.div>
 
-              <motion.div
+              <m.div
                 className="sub-hero__right"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -156,41 +156,41 @@ export default function ServicePage() {
                     ))}
                   </ul>
                 </div>
-              </motion.div>
+              </m.div>
             </div>
           ) : (
             <>
-              <motion.span
+              <m.span
                 className="service-hero__badge"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
               >
                 {service.title}
-              </motion.span>
-              <motion.span
+              </m.span>
+              <m.span
                 className="service-hero__icon"
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ type: 'spring', delay: 0.3 }}
               >
                 <Icon name={theme.icon} size={56} />
-              </motion.span>
-              <motion.h1
+              </m.span>
+              <m.h1
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
               >
                 {pageContent?.tagline || service.title}
-              </motion.h1>
-              <motion.p
+              </m.h1>
+              <m.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
                 className="service-hero__tagline"
               >
                 {pageContent?.overview || `${service.items.length} specialized offerings to power your digital success`}
-              </motion.p>
+              </m.p>
               <p className="service-hero__uk">Serving UK teams across {cities}.</p>
               <div className="service-hero__cta">
                 <Link to="/contact" className="service-hero__btn service-hero__btn--primary">
@@ -211,7 +211,7 @@ export default function ServicePage() {
           <div className="service-content__inner">
             <div className="service-stats__grid">
               {pageContent.stats.map((stat, i) => (
-                <motion.div
+                <m.div
                   key={stat.label}
                   className="service-stats__item"
                   initial={{ opacity: 0, y: 20 }}
@@ -221,7 +221,7 @@ export default function ServicePage() {
                 >
                   <span className="service-stats__value">{stat.value}</span>
                   <span className="service-stats__label">{stat.label}</span>
-                </motion.div>
+                </m.div>
               ))}
             </div>
           </div>
@@ -249,7 +249,7 @@ export default function ServicePage() {
           {subItem ? (
             <div className="sub-premium sub-premium--services-like">
               <section className="sub-premium__section sub-premium__section--split">
-                <motion.div
+                <m.div
                   className="sub-premium__split sub-premium__split--value"
                   initial={{ opacity: 0, y: 18 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -274,12 +274,12 @@ export default function ServicePage() {
                       <strong>Priority-driven outcomes</strong>
                     </article>
                   </div>
-                </motion.div>
+                </m.div>
               </section>
 
               {subContent?.whatYouGet?.length ? (
                 <section className="sub-premium__section sub-premium__section--deliverables">
-                  <motion.div
+                  <m.div
                     className="sub-premium__header"
                     initial={{ opacity: 0, y: 18 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -287,10 +287,10 @@ export default function ServicePage() {
                   >
                     <span className="service-section__badge">Deliverables</span>
                     <h2>What You Get In This Service</h2>
-                  </motion.div>
+                  </m.div>
                   <div className="sub-premium__outcomes">
                     {subContent.whatYouGet.map((item, idx) => (
-                      <motion.article
+                      <m.article
                         key={item}
                         className="sub-premium__outcome-card"
                         initial={{ opacity: 0, y: 20 }}
@@ -301,14 +301,14 @@ export default function ServicePage() {
                         <span className="sub-premium__outcome-index">{idx + 1}</span>
                         <h3>{item}</h3>
                         <p>Structured to support production readiness and measurable growth.</p>
-                      </motion.article>
+                      </m.article>
                     ))}
                   </div>
                 </section>
               ) : null}
 
               <section className="sub-premium__section sub-premium__section--process">
-                <motion.div
+                <m.div
                   className="sub-premium__header"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -316,10 +316,10 @@ export default function ServicePage() {
                 >
                   <span className="service-section__badge">Delivery Model</span>
                   <h2>How We Deliver This Service</h2>
-                </motion.div>
+                </m.div>
                 <div className="sub-premium__timeline sub-premium__timeline--zigzag">
                   {subProcess.map((step, idx) => (
-                    <motion.div
+                    <m.div
                       key={step.title}
                       className={`sub-premium__timeline-step ${idx % 2 ? 'sub-premium__timeline-step--right' : 'sub-premium__timeline-step--left'}`}
                       initial={{ opacity: 0, y: 16 }}
@@ -332,7 +332,7 @@ export default function ServicePage() {
                         <h3>{step.title}</h3>
                         <p>{step.desc}</p>
                       </div>
-                    </motion.div>
+                    </m.div>
                   ))}
                 </div>
               </section>
@@ -340,7 +340,7 @@ export default function ServicePage() {
               {subContent?.faqs?.length ? (
                 <section className="sub-premium__section sub-premium__section--split">
                   <div className="sub-premium__split sub-premium__split--faq">
-                    <motion.div
+                    <m.div
                       className="sub-premium__faq-pane"
                       initial={{ opacity: 0, x: -14 }}
                       whileInView={{ opacity: 1, x: 0 }}
@@ -356,8 +356,8 @@ export default function ServicePage() {
                           </details>
                         ))}
                       </div>
-                    </motion.div>
-                    <motion.aside
+                    </m.div>
+                    <m.aside
                       className="sub-premium__confidence-pane"
                       initial={{ opacity: 0, x: 14 }}
                       whileInView={{ opacity: 1, x: 0 }}
@@ -373,13 +373,13 @@ export default function ServicePage() {
                       <Link to="/contact" className="service-hero__btn service-hero__btn--primary">
                         Discuss Your Requirements
                       </Link>
-                    </motion.aside>
+                    </m.aside>
                   </div>
                 </section>
               ) : null}
 
               <section className="sub-premium__section sub-premium__section--related">
-                <motion.div
+                <m.div
                   className="sub-premium__header"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -387,7 +387,7 @@ export default function ServicePage() {
                 >
                   <span className="service-section__badge">Explore More</span>
                   <h2>Related Sub-Services</h2>
-                </motion.div>
+                </m.div>
                 <div className="sub-premium__related-grid">
                   {relatedSubServices.map((item) => (
                     <Link key={`${item.parentTitle}-${item.slug}`} to={item.path} className="sub-premium__related-card">
@@ -401,7 +401,7 @@ export default function ServicePage() {
               </section>
 
               <section className="sub-premium__section sub-premium__section--cta">
-                <motion.div
+                <m.div
                   className="service-cta sub-premium__cta"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
@@ -414,12 +414,12 @@ export default function ServicePage() {
                   <Link to="/contact" className="service-cta__btn">
                     Start Your Project
                   </Link>
-                </motion.div>
+                </m.div>
               </section>
             </div>
           ) : (
             <div className="service-main-modern">
-              <motion.div
+              <m.div
                 className="service-section__header"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -427,10 +427,10 @@ export default function ServicePage() {
               >
                 <span className="service-section__badge">Our Offerings</span>
                 <h2>What We Offer</h2>
-              </motion.div>
+              </m.div>
               <div className="service-offerings">
                 {service.items.map((item, i) => (
-                  <motion.div
+                  <m.div
                     key={item.title}
                     className="service-offering"
                     initial={{ opacity: 0, y: 30 }}
@@ -447,12 +447,12 @@ export default function ServicePage() {
                         Learn more →
                       </Link>
                     ) : null}
-                  </motion.div>
+                  </m.div>
                 ))}
               </div>
 
               {pageContent?.highlights && (
-                <motion.div
+                <m.div
                   className="service-tech"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
@@ -462,7 +462,7 @@ export default function ServicePage() {
                   <h2>Technologies We Use</h2>
                   <div className="service-tech__grid">
                     {pageContent.highlights.map((tech, i) => (
-                      <motion.span
+                      <m.span
                         key={tech}
                         className="service-tech__badge"
                         initial={{ opacity: 0, scale: 0.9 }}
@@ -471,14 +471,14 @@ export default function ServicePage() {
                         transition={{ delay: i * 0.06 }}
                       >
                         {tech}
-                      </motion.span>
+                      </m.span>
                     ))}
                   </div>
-                </motion.div>
+                </m.div>
               )}
 
               {stepItems.length > 0 && (
-                <motion.div
+                <m.div
                   className="service-process"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
@@ -488,7 +488,7 @@ export default function ServicePage() {
                   <h2>Our Process</h2>
                   <div className="service-process__steps">
                     {stepItems.map((step, i) => (
-                      <motion.div
+                      <m.div
                         key={step.title}
                         className="service-process__step"
                         initial={{ opacity: 0, x: -20 }}
@@ -501,14 +501,14 @@ export default function ServicePage() {
                           <strong>{step.title}</strong>
                           {step.desc && <p>{step.desc}</p>}
                         </div>
-                      </motion.div>
+                      </m.div>
                     ))}
                   </div>
-                </motion.div>
+                </m.div>
               )}
 
               {pageContent?.benefits && (
-                <motion.div
+                <m.div
                   className="service-benefits"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
@@ -518,7 +518,7 @@ export default function ServicePage() {
                   <h2>Key Benefits</h2>
                   <div className="service-benefits__grid">
                     {pageContent.benefits.map((benefit, i) => (
-                      <motion.div
+                      <m.div
                         key={benefit.title}
                         className="service-benefits__card"
                         initial={{ opacity: 0, y: 24 }}
@@ -530,10 +530,10 @@ export default function ServicePage() {
                         <span className="service-benefits__icon"><Icon name={benefit.icon} size={32} /></span>
                         <h4>{benefit.title}</h4>
                         <p>{benefit.desc}</p>
-                      </motion.div>
+                      </m.div>
                     ))}
                   </div>
-                </motion.div>
+                </m.div>
               )}
 
               <div className="service-related">
@@ -553,7 +553,7 @@ export default function ServicePage() {
                 </div>
               </div>
 
-              <motion.div
+              <m.div
                 className="service-why"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
@@ -578,9 +578,9 @@ export default function ServicePage() {
                     <p>From discovery to deployment and beyond</p>
                   </div>
                 </div>
-              </motion.div>
+              </m.div>
 
-              <motion.div
+              <m.div
                 className="service-cta"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
@@ -591,7 +591,7 @@ export default function ServicePage() {
                 <Link to="/contact" className="service-cta__btn">
                   Get a Free Quote
                 </Link>
-              </motion.div>
+              </m.div>
             </div>
           )}
         </div>

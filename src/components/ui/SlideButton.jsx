@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import {
-  motion,
+  m,
   useMotionValue,
   useTransform,
   AnimatePresence,
@@ -106,10 +106,10 @@ export default function SlideButton({
     <div className={rootClass}>
       {!completed && (
         <>
-          <motion.div className="slide-button__fill" style={{ width: fillW }} aria-hidden />
+          <m.div className="slide-button__fill" style={{ width: fillW }} aria-hidden />
           <span className="slide-button__hint">{hint}</span>
           <div className="slide-button__drag-host">
-            <motion.button
+            <m.button
               type="button"
               style={{ x }}
               drag={disabled ? false : 'x'}
@@ -126,7 +126,7 @@ export default function SlideButton({
               aria-label={hint}
             >
               <SendHorizontal size={16} strokeWidth={2} aria-hidden />
-            </motion.button>
+            </m.button>
           </div>
         </>
       )}
@@ -135,7 +135,7 @@ export default function SlideButton({
         <div className="slide-button__result">
           <button type="button" className="slide-button__result-btn" disabled={status === 'loading'}>
             <AnimatePresence mode="wait">
-              <motion.div
+              <m.div
                 key={status}
                 initial={{ opacity: 0, scale: 0.65 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -143,7 +143,7 @@ export default function SlideButton({
                 transition={{ duration: 0.2 }}
               >
                 <StatusIcon status={status} />
-              </motion.div>
+              </m.div>
             </AnimatePresence>
           </button>
         </div>
