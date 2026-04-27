@@ -290,6 +290,7 @@
   border-top: 1px solid var(--border-subtle);
   border-bottom: 1px solid var(--border-subtle);
   overflow: hidden;
+  contain: layout style;
 }
 
 .home-landing .home-marquee__wrap {
@@ -320,8 +321,13 @@
 .home-landing .scroll-text-marquee--css-loop .scroll-text-marquee__track {
   display: inline-block;
   white-space: nowrap;
-  will-change: transform;
   animation: home-marquee-css-drift 32s linear infinite;
+}
+
+@media (min-width: 1025px) {
+  .home-landing .scroll-text-marquee--css-loop .scroll-text-marquee__track {
+    animation-duration: 38s;
+  }
 }
 
 .home-landing .scroll-text-marquee--css-loop-reverse .scroll-text-marquee__track {

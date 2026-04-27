@@ -7,18 +7,11 @@ export default function HomeServicesMarquee() {
   return (
     <section className="home-marquee" aria-label="Core services">
       <div className="home-marquee__wrap">
-        <ScrollBaseAnimation
-          delay={500}
-          baseVelocity={-0.1}
-          scrollSensitivity={0.0068}
-          className="home-marquee__row home-marquee__row--one"
-        >
+        <ScrollBaseAnimation delay={500} className="home-marquee__row home-marquee__row--one">
           {LINE_A}
         </ScrollBaseAnimation>
         <ScrollBaseAnimation
           delay={500}
-          baseVelocity={0.1}
-          scrollSensitivity={0.0068}
           className="home-marquee__row home-marquee__row--two"
           reverse
         >

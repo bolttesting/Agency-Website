@@ -105,24 +105,55 @@ export function ShaderAnimation({ className = '', style = {} }) {
     onWindowResize();
     window.addEventListener('resize', onWindowResize, false);
 
-    const animate = () => {
+    /** Stop rendering when the hero is off-screen or the tab is hidden (frees CPU/GPU during scroll). */
+    let inView = true;
+    const io = new IntersectionObserver(
+      (entries) => {
+        inView = entries.length > 0 ? entries[0].isIntersecting : true;
+        if (inView && !document.hidden) schedule();
+      },
+      { root: null, threshold: 0, rootMargin: '80px' },
+    );
+    io.observe(container);
+
+    const onVisibility = () => {
+      if (!document.hidden && inView) schedule();
+    };
+    document.addEventListener('visibilitychange', onVisibility, false);
+
+    const schedule = () => {
       if (stopped) return;
-      rafRef.current = requestAnimationFrame(animate);
+      if (document.hidden || !inView) {
+        rafRef.current = 0;
+        return;
+      }
+      if (rafRef.current) return;
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
+    const tick = () => {
+      if (stopped) return;
+      rafRef.current = 0;
+      if (document.hidden || !inView) return;
       uniforms.time.value += 0.05;
       try {
         renderer.render(scene, camera);
       } catch (error) {
         stopped = true;
-        cancelAnimationFrame(rafRef.current);
         console.warn('ShaderAnimation: render stopped after WebGL error.', error);
+        return;
       }
+      schedule();
     };
 
-    animate();
+    schedule();
 
     return () => {
       stopped = true;
+      io.disconnect();
+      document.removeEventListener('visibilitychange', onVisibility, false);
       cancelAnimationFrame(rafRef.current);
+      rafRef.current = 0;
       window.removeEventListener('resize', onWindowResize);
       renderer.domElement.removeEventListener('webglcontextlost', onContextLost);
       if (renderer.domElement.parentNode === container) {

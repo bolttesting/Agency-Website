@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useLayoutEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import './ReturnToTop.css';
 
@@ -7,14 +7,38 @@ const SHOW_AFTER_PX = 420;
 export default function ReturnToTop() {
   const { pathname } = useLocation();
   const [visible, setVisible] = useState(false);
+  const lastRef = useRef(false);
+
+  useLayoutEffect(() => {
+    if (typeof window === 'undefined') return;
+    const next = window.scrollY > SHOW_AFTER_PX;
+    lastRef.current = next;
+    setVisible(next);
+  }, [pathname]);
 
   useEffect(() => {
-    const onScroll = () => {
-      setVisible(window.scrollY > SHOW_AFTER_PX);
+    if (typeof window === 'undefined') return;
+    let raf = 0;
+
+    const read = () => {
+      raf = 0;
+      const next = window.scrollY > SHOW_AFTER_PX;
+      if (lastRef.current !== next) {
+        lastRef.current = next;
+        setVisible(next);
+      }
     };
-    onScroll();
+
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(read);
+    };
+
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
   }, []);
 
   const goTop = () => {
