@@ -310,6 +310,39 @@
   white-space: pre;
 }
 
+/* Mobile / touch: CSS transform loop (compositor) — no JS rAF fighting scroll. */
+.home-landing .scroll-text-marquee--css-loop {
+  overflow: hidden;
+  width: 100%;
+  contain: content;
+}
+
+.home-landing .scroll-text-marquee--css-loop .scroll-text-marquee__track {
+  display: inline-block;
+  white-space: nowrap;
+  will-change: transform;
+  animation: home-marquee-css-drift 32s linear infinite;
+}
+
+.home-landing .scroll-text-marquee--css-loop-reverse .scroll-text-marquee__track {
+  animation-direction: reverse;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-landing .scroll-text-marquee--css-loop .scroll-text-marquee__track {
+    animation: none;
+  }
+}
+
+@keyframes home-marquee-css-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
 .home-landing .home-marquee__row {
   font-family: var(--font-display);
   font-size: clamp(3.25rem, 11.5vw, 8.5rem);

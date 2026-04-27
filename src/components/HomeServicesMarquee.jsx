@@ -20,6 +20,7 @@ export default function HomeServicesMarquee() {
           baseVelocity={0.1}
           scrollSensitivity={0.0068}
           className="home-marquee__row home-marquee__row--two"
+          reverse
         >
           {LINE_B}
         </ScrollBaseAnimation>
