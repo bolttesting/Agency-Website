@@ -2,9 +2,12 @@
 <html lang="en-GB">
   <head>
     <meta charset="UTF-8" />
-    <!-- Favicons: vector only — avoids multi‑megabyte LC.png decoding on slow devices -->
+    <!-- Favicons: square PNG + ICO for Google SERP (needs ≥48×48 square); SVG optional for browsers -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
     <link rel="icon" type="image/svg+xml" href="/LC.svg" sizes="any" />
-    <link rel="apple-touch-icon" href="/LC.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Crawl hint in first HTML (before React). Per-route title/canonical/OG still set in Seo.jsx after load. -->
