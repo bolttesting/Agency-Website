@@ -2,8 +2,16 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
+import { normalizeSiteOrigin } from './src/config/siteOrigin.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
+const SITE_ORIGIN_PLACEHOLDER = '__SITE_ORIGIN__'
+
+function siteOriginForHtml(mode) {
+  const env = loadEnv(mode, process.cwd(), '')
+  return normalizeSiteOrigin(env.VITE_SITE_URL || '')
+}
 
 function supabaseOriginFromEnv(mode) {
   const env = loadEnv(mode, process.cwd(), '')
@@ -24,14 +32,17 @@ export default defineConfig(({ mode }) => {
     plugins: [
       react(),
       {
-        name: 'inject-supabase-preconnect',
+        name: 'inject-index-html-env',
         transformIndexHtml(html) {
-          if (!supabaseOrigin) return html
-          const tag = `    <link rel="preconnect" href="${supabaseOrigin}" crossorigin />\n`
-          return html.replace(
-            '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />',
-            `<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />\n${tag.trimEnd()}\n`,
-          )
+          let out = html.split(SITE_ORIGIN_PLACEHOLDER).join(siteOriginForHtml(mode))
+          if (supabaseOrigin) {
+            const tag = `    <link rel="preconnect" href="${supabaseOrigin}" crossorigin />\n`
+            out = out.replace(
+              '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />',
+              `<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />\n${tag.trimEnd()}\n`,
+            )
+          }
+          return out
         },
       },
     ],

@@ -1,6 +1,8 @@
 /**
  * UK-focused SEO defaults. Set VITE_SITE_URL in .env to your live origin (e.g. https://www.yourdomain.co.uk).
  */
+import { SITE_ORIGIN_FALLBACK, normalizeSiteOrigin } from './siteOrigin';
+
 export const SITE_NAME = 'Logix Contact';
 export const SITE_NAME_FULL = 'Logix Contact — UK Web & App Development Agency';
 
@@ -14,12 +16,12 @@ export const DEFAULT_KEYWORDS =
 export function getSiteUrl() {
   const env = import.meta.env.VITE_SITE_URL;
   if (typeof env === 'string' && env.trim()) {
-    return env.replace(/\/$/, '');
+    return normalizeSiteOrigin(env);
   }
   if (typeof window !== 'undefined') {
     return window.location.origin;
   }
-  return 'https://logixcontact.co.uk';
+  return SITE_ORIGIN_FALLBACK;
 }
 
 export const LOCALE = 'en_GB';
