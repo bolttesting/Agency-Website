@@ -28,4 +28,9 @@
   <url><loc>https://logixcontact.co.uk/services/ui-ux-design/adobe-xd-and-illustrator-mastery</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://logixcontact.co.uk/services/ui-ux-design/rive-animation-magic</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://logixcontact.co.uk/services/ui-ux-design/interactive-prototyping</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://logixcontact.co.uk/legal/terms</loc><changefreq>yearly</changefreq><priority>0.35</priority></url>
+  <url><loc>https://logixcontact.co.uk/legal/privacy</loc><changefreq>yearly</changefreq><priority>0.35</priority></url>
+  <url><loc>https://logixcontact.co.uk/legal/refunds</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://logixcontact.co.uk/legal/service-agreement</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://logixcontact.co.uk/legal/cookie-policy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>

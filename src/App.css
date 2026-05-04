@@ -548,6 +548,24 @@
   50% { transform: translate(-12px, 20px); opacity: 0.45; }
 }
 
+/* Phones: stop animated blurs (constant layer invalidation while scrolling). */
+@media (max-width: 768px) {
+  .hero__noise {
+    display: none;
+  }
+
+  .hero__glow {
+    filter: blur(72px);
+  }
+
+  .hero__glow--1,
+  .hero__glow--2,
+  .hero__glow--3 {
+    animation: none;
+    opacity: 0.42;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero__glow--1,
   .hero__glow--2,

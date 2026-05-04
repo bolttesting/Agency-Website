@@ -35,9 +35,20 @@
 }
 
 html {
-  scroll-behavior: smooth;
   overflow-x: clip;
   max-width: 100%;
+}
+
+/*
+ * Global smooth scroll fights native momentum scrolling on many phones (stutter / “stickiness”).
+ * Keep it for precise pointers only; respect reduced motion.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  @media (hover: hover) and (pointer: fine) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
 }
 
 body {
@@ -99,6 +110,13 @@ body {
   background: radial-gradient(circle, var(--accent-blue) 0%, transparent 70%);
   bottom: -100px;
   left: -100px;
+}
+
+/* Huge blurred fixed layers are costly during scroll on mobile GPUs — omit entirely. */
+@media (max-width: 768px) {
+  .gradient-orb {
+    display: none;
+  }
 }
 
 /* —— Light theme (header toggle + persistence) —— */

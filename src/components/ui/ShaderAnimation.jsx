@@ -69,9 +69,12 @@ export function ShaderAnimation({ className = '', style = {} }) {
     const mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
 
+    const narrowViewport =
+      typeof window !== 'undefined' && window.matchMedia('(max-width: 1024px)').matches;
+
     let renderer;
     try {
-      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer = new THREE.WebGLRenderer({ antialias: !narrowViewport, alpha: true });
     } catch (error) {
       // Some devices/browsers intermittently fail to create a WebGL context.
       // Keep the page usable by disabling only this decorative background.
@@ -80,7 +83,7 @@ export function ShaderAnimation({ className = '', style = {} }) {
       material.dispose();
       return undefined;
     }
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, narrowViewport ? 1 : 2));
     renderer.setClearColor(0x000000, 0);
 
     container.appendChild(renderer.domElement);

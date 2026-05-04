@@ -1,4 +1,4 @@
-import { lazy, Suspense, useMemo, useState, useEffect } from 'react';
+import { lazy, Suspense, useMemo, useSyncExternalStore } from 'react';
 import { m, useReducedMotion } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
 import { useSiteData } from '../context/SiteDataContext';
@@ -28,6 +28,21 @@ const fadeUp = (reduceMotion) => ({
 const PILL_LABELS = ['Research-led UX', 'Web & mobile', 'Launch support'];
 
 const ShaderAnimation = lazy(() => import('./ui/ShaderAnimation'));
+
+/** WebGL hero shader is disabled ≤768px — it competes with scroll compositing on phones. */
+function useWideEnoughForHeroShader() {
+  const query = '(min-width: 769px)';
+  return useSyncExternalStore(
+    (onStoreChange) => {
+      if (typeof window === 'undefined') return () => {};
+      const mq = window.matchMedia(query);
+      mq.addEventListener('change', onStoreChange);
+      return () => mq.removeEventListener('change', onStoreChange);
+    },
+    () => (typeof window !== 'undefined' ? window.matchMedia(query).matches : false),
+    () => false,
+  );
+}
 
 /** Hero corner avatars (Unsplash); matches “Meet the team” tone */
 const HERO_AVATAR_ITEMS = [
@@ -98,12 +113,8 @@ function heroAvatarsFromTeam(team) {
 
 export default function Hero() {
   const reduceMotion = useReducedMotion();
-  const [idleTimeout, setIdleTimeout] = useState(2200);
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    setIdleTimeout(window.matchMedia('(max-width: 768px)').matches ? 4800 : 2200);
-  }, []);
-  const idleReady = useIdleReady({ timeout: idleTimeout });
+  const allowHeroShader = useWideEnoughForHeroShader();
+  const idleReady = useIdleReady({ timeout: 2200 });
   const { theme } = useTheme();
   const { team } = useSiteData();
   const avatarItems = useMemo(() => heroAvatarsFromTeam(team), [team]);
@@ -111,7 +122,7 @@ export default function Hero() {
 
   return (
     <section className="hero hero--centered" id="hero">
-      {!reduceMotion && idleReady && (
+      {!reduceMotion && allowHeroShader && idleReady && (
         <Suspense fallback={null}>
           <ShaderAnimation className="hero__shader" />
         </Suspense>
