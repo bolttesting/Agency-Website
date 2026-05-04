@@ -2,7 +2,7 @@ import { lazy, Suspense, useMemo, useSyncExternalStore } from 'react';
 import { m, useReducedMotion } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
 import { useSiteData } from '../context/SiteDataContext';
-import { useIdleReady } from '../hooks/useIdleReady';
+import { usePostLoadIdleReady } from '../hooks/usePostLoadIdleReady';
 import ButtonCrossArrow from './ui/ButtonCrossArrow';
 import ButtonAnimatedGradient from './ui/ButtonAnimatedGradient';
 import AvatarGroup from './ui/avatar-group';
@@ -114,7 +114,8 @@ function heroAvatarsFromTeam(team) {
 export default function Hero() {
   const reduceMotion = useReducedMotion();
   const allowHeroShader = useWideEnoughForHeroShader();
-  const idleReady = useIdleReady({ timeout: 2200 });
+  /** After `load` + idle so Three/WebGL does not compete with first paint (desktop PSI). */
+  const idleReady = usePostLoadIdleReady({ idleTimeout: 5200 });
   const { theme } = useTheme();
   const { team } = useSiteData();
   const avatarItems = useMemo(() => heroAvatarsFromTeam(team), [team]);

@@ -74,7 +74,8 @@ export function ShaderAnimation({ className = '', style = {} }) {
 
     let renderer;
     try {
-      renderer = new THREE.WebGLRenderer({ antialias: !narrowViewport, alpha: true });
+      // Full-screen quad shader: skip MSAA on wide viewports to cut GPU cost (desktop PSI).
+      renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true });
     } catch (error) {
       // Some devices/browsers intermittently fail to create a WebGL context.
       // Keep the page usable by disabling only this decorative background.
@@ -83,7 +84,7 @@ export function ShaderAnimation({ className = '', style = {} }) {
       material.dispose();
       return undefined;
     }
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, narrowViewport ? 1 : 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, narrowViewport ? 1 : 1.25));
     renderer.setClearColor(0x000000, 0);
 
     container.appendChild(renderer.domElement);
