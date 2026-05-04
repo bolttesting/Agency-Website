@@ -96,6 +96,14 @@ const policyLinks = [
   { label: 'Service & contract policy', to: '/legal/service-agreement' },
 ];
 
+/** Authoritative UK references (outbound). These are not backlinks to your site; they support trust context. */
+const ukResourcesLinks = [
+  { label: 'ICO — UK GDPR & data protection', href: 'https://ico.org.uk/for-organisations/' },
+  { label: 'GOV.UK — Business and self-employed', href: 'https://www.gov.uk/browse/business' },
+  { label: 'Companies House', href: 'https://www.gov.uk/government/organisations/companies-house' },
+  { label: 'National Cyber Security Centre', href: 'https://www.ncsc.gov.uk/' },
+];
+
 export default function Footer() {
   const { settings } = useSiteData();
   const socialLinks = parseFooterSocialLinks(settings?.social_links);
@@ -108,14 +116,29 @@ export default function Footer() {
     services: false,
     contact: false,
     policies: false,
+    ukResources: false,
     presence: false,
   });
 
   useEffect(() => {
     if (!isNarrow) {
-      setOpen({ quick: true, services: true, contact: true, policies: true, presence: true });
+      setOpen({
+        quick: true,
+        services: true,
+        contact: true,
+        policies: true,
+        ukResources: true,
+        presence: true,
+      });
     } else {
-      setOpen({ quick: true, services: false, contact: false, policies: false, presence: false });
+      setOpen({
+        quick: true,
+        services: false,
+        contact: false,
+        policies: false,
+        ukResources: false,
+        presence: false,
+      });
     }
   }, [isNarrow]);
 
@@ -195,6 +218,23 @@ export default function Footer() {
                 {policyLinks.map((link) => (
                   <li key={link.to}>
                     <Link to={link.to}>{link.label}</Link>
+                  </li>
+                ))}
+              </ul>
+            </FooterAccordionColumn>
+            <FooterAccordionColumn
+              sectionId="uk-resources"
+              title="UK resources"
+              isNarrow={isNarrow}
+              isOpen={open.ukResources}
+              onToggle={() => toggle('ukResources')}
+            >
+              <ul>
+                {ukResourcesLinks.map((link) => (
+                  <li key={link.href}>
+                    <a href={link.href} target="_blank" rel="noopener noreferrer">
+                      {link.label}
+                    </a>
                   </li>
                 ))}
               </ul>

@@ -1,6 +1,15 @@
 import { useEffect } from 'react';
 import { SITE_NAME, getSiteUrl, HTML_LANG } from '../config/seo';
 
+const UK_POSTAL_ADDRESS = {
+  '@type': 'PostalAddress',
+  streetAddress: 'Suit 28 Nouvelle Building, 52 Sutton Court Road',
+  addressLocality: 'Sutton',
+  addressRegion: 'England',
+  postalCode: 'SM1 4SL',
+  addressCountry: 'GB',
+};
+
 /** One-time Organization + WebSite + LocalBusiness JSON-LD for UK local signals. */
 export default function GlobalJsonLd() {
   useEffect(() => {
@@ -16,14 +25,7 @@ export default function GlobalJsonLd() {
           '@type': 'Country',
           name: 'United Kingdom',
         },
-        address: {
-          '@type': 'PostalAddress',
-          streetAddress: 'Suit 28 Nouvelle Building, 52 Sutton Court Road',
-          addressLocality: 'Sutton',
-          addressRegion: 'England',
-          postalCode: 'SM1 4SL',
-          addressCountry: 'GB',
-        },
+        address: { ...UK_POSTAL_ADDRESS },
       },
       {
         '@type': 'WebSite',
@@ -45,10 +47,7 @@ export default function GlobalJsonLd() {
         telephone: '+44 7440 147953',
         email: 'info@logixcontact.co.uk',
         priceRange: 'GBP 799 - GBP 3000',
-        address: {
-          '@type': 'PostalAddress',
-          addressCountry: 'GB',
-        },
+        address: { ...UK_POSTAL_ADDRESS },
         areaServed: [
           { '@type': 'Country', name: 'United Kingdom' },
           { '@type': 'City', name: 'London' },
